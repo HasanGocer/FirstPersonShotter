@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 public class Buttons : MonoSingleton<Buttons>
 {
@@ -19,6 +20,7 @@ public class Buttons : MonoSingleton<Buttons>
 
     public GameObject startPanel;
     [SerializeField] Button _startButton;
+    [SerializeField] TMP_Text _countdownText;
 
     [Header("Setting_Panel")]
     [Space(10)]
@@ -113,13 +115,26 @@ public class Buttons : MonoSingleton<Buttons>
         _winPrizeButton.onClick.AddListener(() => StartCoroutine(WinPrizeButton()));
         _winEmptyButton.onClick.AddListener(() => StartCoroutine(WinButton()));
         _failButton.onClick.AddListener(() => StartCoroutine(FailButton()));
-        _startButton.onClick.AddListener(StartButton);
+        _startButton.onClick.AddListener(() => StartCoroutine(StartButton()));
     }
 
-    private void StartButton()
+    private IEnumerator StartButton()
     {
         GameManager.Instance.gameStat = GameManager.GameStat.start;
         startPanel.SetActive(false);
+        _countdownText.gameObject.SetActive(true);
+        _countdownText.transform.localScale = new Vector3(0, 0, 0);
+
+        for (int i = 3; i < 0; i--)
+        {
+            _countdownText.transform.DOScale(1, 1);
+            _countdownText.text = i.ToString();
+            yield return new WaitForSeconds(1);
+            _countdownText.transform.localScale = new Vector3(0, 0, 0);
+        }
+        _countdownText.transform.DOScale(1, 1);
+        _countdownText.text = "Start";
+        yield return new WaitForSeconds(1);
 
         MarketSystem.Instance.GameStart();
         MyDoPath.Instance.FirstSpawn();
