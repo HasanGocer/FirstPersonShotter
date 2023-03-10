@@ -8,7 +8,7 @@ public class ShotSystem : MonoSingleton<ShotSystem>
     [SerializeField] int _hitDistance;
 
     //Main karakterin Shot kodu
-    public void Update()
+    public void Hit()
     {
         RaycastHit hit;
 
@@ -19,6 +19,9 @@ public class ShotSystem : MonoSingleton<ShotSystem>
 
     public void RivalHit(Vector3 hitPos, GameObject rival)
     {
-        print("31");
+        RivalID rivalID = rival.GetComponent<RivalID>();
+
+        rivalID.rivalHealth -= ItemData.Instance.field.mainDamage;
+        ParticalSystem.Instance.BodyShotPartical(hitPos);
     }
 }

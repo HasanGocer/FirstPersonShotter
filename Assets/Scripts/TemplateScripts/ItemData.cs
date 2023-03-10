@@ -7,7 +7,7 @@ public class ItemData : MonoSingleton<ItemData>
     [System.Serializable]
     public class Field
     {
-        public float mainHealth, rivalHealth, friendHealth;
+        public float mainHealth, rivalHealth, friendHealth, mainDamage;
     }
 
     public Field field;
