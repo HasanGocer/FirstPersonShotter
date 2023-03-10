@@ -136,6 +136,7 @@ public class Buttons : MonoSingleton<Buttons>
         _countdownText.text = "Start";
         yield return new WaitForSeconds(1);
 
+        ShotSystem.Instance.ShotSystemStart();
         MarketSystem.Instance.GameStart();
     }
     private IEnumerator WinButton()
