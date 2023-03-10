@@ -19,6 +19,7 @@ public class Buttons : MonoSingleton<Buttons>
     [Space(10)]
 
     public GameObject startPanel;
+    [SerializeField] GameObject _CountdownPanel;
     [SerializeField] Button _startButton;
     [SerializeField] TMP_Text _countdownText;
 
@@ -49,7 +50,6 @@ public class Buttons : MonoSingleton<Buttons>
     [SerializeField] GameObject _loadingPanel;
     [SerializeField] int _loadingScreenCountdownTime;
     [SerializeField] int _startSceneCount;
-    [SerializeField] int _sceneCount;
 
     private void Start()
     {
@@ -68,8 +68,6 @@ public class Buttons : MonoSingleton<Buttons>
         _loadingPanel.SetActive(false);
         _globalPanel.SetActive(true);
         startPanel.SetActive(true);
-
-        MarketSystem.Instance.MarketStart();
     }
     public IEnumerator NoThanxOnActive()
     {
@@ -122,10 +120,11 @@ public class Buttons : MonoSingleton<Buttons>
     {
         GameManager.Instance.gameStat = GameManager.GameStat.start;
         startPanel.SetActive(false);
+        _CountdownPanel.SetActive(true);
         _countdownText.gameObject.SetActive(true);
         _countdownText.transform.localScale = new Vector3(0, 0, 0);
 
-        for (int i = 3; i < 0; i--)
+        for (int i = 3; i > 0; i--)
         {
             _countdownText.transform.DOScale(1, 1);
             _countdownText.text = i.ToString();
@@ -135,9 +134,10 @@ public class Buttons : MonoSingleton<Buttons>
         _countdownText.transform.DOScale(1, 1);
         _countdownText.text = "Start";
         yield return new WaitForSeconds(1);
+        _CountdownPanel.SetActive(false);
 
         ShotSystem.Instance.ShotSystemStart();
-        MarketSystem.Instance.GameStart();
+        //MarketSystem.Instance.GameStart();
     }
     private IEnumerator WinButton()
     {
@@ -171,9 +171,8 @@ public class Buttons : MonoSingleton<Buttons>
         MoneySystem.Instance.MoneyTextRevork(GameManager.Instance.addedMoney);
         yield return new WaitForSeconds(finishWaitTime);
 
-        int templevel = GameManager.Instance.level / 10;
 
-        SceneManager.LoadScene((templevel % _sceneCount) + _startSceneCount);
+        SceneManager.LoadScene(_startSceneCount);
     }
     private void SettingButton()
     {

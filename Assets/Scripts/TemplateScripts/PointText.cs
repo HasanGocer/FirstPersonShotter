@@ -3,41 +3,43 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using DG.Tweening;
+using DamageNumbersPro;
 
 public class PointText : MonoSingleton<PointText>
 {
-    public enum PointType
-    {
-        RedHit = 0,
-        GreenHit = 1,
-        yellowHit = 2
-    }
-
     [Header("Text_Field")]
     [Space(10)]
 
-    [SerializeField] private int _OPMoneyInt;
+    [SerializeField] private int _OPRedTextCount;
+    [SerializeField] private int _OPGreenTextCount;
     [SerializeField] private float _textMoveTime;
-    [SerializeField] private float _moneyJumpDistance;
-    [SerializeField] Ease _moveEaseType = Ease.InOutBounce;
 
-    public void CallPointText(GameObject Pos, int count, PointType pointType)
+    public void CallRedText(GameObject Pos, int count)
     {
-        StartCoroutine(CallPointMoneyText(Pos, count, pointType));
+        StartCoroutine(CallPointRedText(Pos, count));
     }
 
-    private IEnumerator CallPointMoneyText(GameObject Pos, int count, PointType pointType)
+    public void CallGreenText(GameObject Pos, int count)
     {
-        GameObject obj = ObjectPool.Instance.GetPooledObject(_OPMoneyInt);
+        StartCoroutine(CallPointGreenText(Pos, count));
+    }
 
-        if (pointType == PointType.GreenHit) obj.GetComponent<TMP_Text>().color = Color.green;
-        if (pointType == PointType.RedHit) obj.GetComponent<TMP_Text>().color = Color.red;
-        if (pointType == PointType.yellowHit) obj.GetComponent<TMP_Text>().color = Color.yellow;
+    private IEnumerator CallPointRedText(GameObject Pos, int count)
+    {
+        GameObject obj = ObjectPool.Instance.GetPooledObject(_OPRedTextCount);
 
-        obj.GetComponent<TMP_Text>().text = count.ToString();
+        obj.GetComponent<DamageNumberMesh>().leftText = "" + count;
         obj.transform.position = Pos.transform.position;
-        obj.transform.DOMove(new Vector3(Pos.transform.position.x, Pos.transform.position.y + _moneyJumpDistance, Pos.transform.position.z), _textMoveTime).SetEase(_moveEaseType);
         yield return new WaitForSeconds(_textMoveTime);
-        ObjectPool.Instance.AddObject(_OPMoneyInt, obj);
+        ObjectPool.Instance.AddObject(_OPRedTextCount, obj);
+    }
+    private IEnumerator CallPointGreenText(GameObject Pos, int count)
+    {
+        GameObject obj = ObjectPool.Instance.GetPooledObject(_OPGreenTextCount);
+
+        obj.GetComponent<DamageNumberMesh>().leftText = "" + count;
+        obj.transform.position = Pos.transform.position;
+        yield return new WaitForSeconds(_textMoveTime);
+        ObjectPool.Instance.AddObject(_OPGreenTextCount, obj);
     }
 }
