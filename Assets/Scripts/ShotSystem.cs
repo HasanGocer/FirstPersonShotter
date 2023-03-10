@@ -4,22 +4,21 @@ using UnityEngine;
 
 public class ShotSystem : MonoSingleton<ShotSystem>
 {
+    [SerializeField] GameObject _character, _gunPos;
+    [SerializeField] int _hitDistance;
 
     //Main karakterin Shot kodu
-    public void MainShot()
+    public void Update()
     {
-        Vector3 bottomLeft = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, Camera.main.nearClipPlane));
-        Vector3 topRight = Camera.main.ViewportToWorldPoint(new Vector3(1, 1, Camera.main.nearClipPlane));
+        RaycastHit hit;
 
-        Bounds bounds = new Bounds((bottomLeft + topRight) / 2, topRight - bottomLeft);
+        if (Physics.Raycast(_gunPos.transform.position, transform.TransformDirection(Vector3.forward) * _hitDistance, out hit, _hitDistance))
+            if (hit.collider.gameObject.CompareTag("Wall")) ParticalSystem.Instance.WallShotPartical(hit.point);
+            else if (hit.collider.gameObject.CompareTag("RivalPlayer")) RivalHit(hit.point, hit.collider.gameObject);
+    }
 
-
-        RaycastHit[] hits = Physics.RaycastAll(bounds.center, Vector3.forward, bounds.size.z);
-
-
-        foreach (RaycastHit hit in hits)
-        {
-
-        }
+    public void RivalHit(Vector3 hitPos, GameObject rival)
+    {
+        print("31");
     }
 }

@@ -137,7 +137,6 @@ public class Buttons : MonoSingleton<Buttons>
         yield return new WaitForSeconds(1);
 
         MarketSystem.Instance.GameStart();
-        MyDoPath.Instance.FirstSpawn();
     }
     private IEnumerator WinButton()
     {

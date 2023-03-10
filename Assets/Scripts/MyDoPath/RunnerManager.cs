@@ -14,9 +14,9 @@ public class RunnerManager : MonoSingleton<RunnerManager>
 
     public List<GameObject> Walker = new List<GameObject>();
 
-    public IEnumerator StartWalkerWalk(int walkerCount, int PathCount, ItemData itemData)
+    public IEnumerator StartWalkerWalk(int walkerCount, int walkerTypeCount, float walkerHealth, float walkerConstantHealth, int PathCount, ItemData itemData)
     {
-        for (int i1 = itemData.field.walkerTypeCount; i1 >= 0; i1--)
+        for (int i1 = walkerTypeCount; i1 >= 0; i1--)
         {
             MyDoPath.Instance.walkerCount += walkerCount + (levelModRunnerPlusCount * i1);
             for (int i2 = 0; i2 < walkerCount + (levelModRunnerPlusCount * i1); i2++)
@@ -24,7 +24,7 @@ public class RunnerManager : MonoSingleton<RunnerManager>
                 GameObject obj = GetObject(i1);
                 WalkerID walkerID = obj.GetComponent<WalkerID>();
 
-                WalkerStatPlacement(obj, walkerID, PathCount, i1, itemData.field.walkerHealth - (i1 * itemData.constant.walkerHealth));
+                WalkerStatPlacement(obj, walkerID, PathCount, i1, (int)walkerHealth - (i1 * (int)walkerConstantHealth));
                 yield return new WaitForSeconds(_spawnCoundownTime);
             }
         }

@@ -25,12 +25,12 @@ public class MyDoPath : MonoSingleton<MyDoPath>
 
     public int walkerCount = 0;
 
-    public void FirstSpawn()
+    public void FirstSpawn(int walkerCount, int walkerTypeCount, int walkerConstantHealth, int walkerHealth)
     {
         ItemData itemData = ItemData.Instance;
 
         for (int i = 0; i < _ways.Count; i++)
-            StartCoroutine(RunnerManager.Instance.StartWalkerWalk(itemData.field.walkerCount, i, itemData));
+            StartCoroutine(RunnerManager.Instance.StartWalkerWalk(walkerCount, walkerTypeCount, walkerConstantHealth, walkerHealth, i, itemData));
     }
 
     public void StartNewBoss(GameObject boss, WalkerID walkerID)

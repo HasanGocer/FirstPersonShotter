@@ -32,7 +32,6 @@ public class PlayerMovement : MonoBehaviour
                 touchDown = touch.position;
                 touchUp = touch.position;
             }
-
         }
         if (dragStarted)
         {

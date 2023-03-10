@@ -123,62 +123,12 @@ public class MarketSystem : MonoSingleton<MarketSystem>
         GameManager gameManager = GameManager.Instance;
         MoneySystem moneySystem = MoneySystem.Instance;
 
-        switch (fieldCount)
-        {
-            case 0:
-                if (gameManager.money >= itemData.fieldPrice.castleHealth)
-                {
-                    moneySystem.MoneyTextRevork(itemData.fieldPrice.castleHealth * -1);
-                    itemData.SetCastleHealth();
-                    marketMainField.MarketMainFieldPrice[0].text = moneySystem.NumberTextRevork(itemData.fieldPrice.castleHealth);
-                    marketMainField.MarketMainFieldLevel[0].text = "Level " + itemData.factor.castleHealth;
-                }
-                break;
-            case 1:
-                if (gameManager.money >= itemData.fieldPrice.gunAtackPower)
-                {
-                    moneySystem.MoneyTextRevork(itemData.fieldPrice.gunAtackPower * -1);
-                    itemData.SetGunAtackPower();
-                    marketMainField.MarketMainFieldPrice[1].text = moneySystem.NumberTextRevork(itemData.fieldPrice.gunAtackPower);
-                    marketMainField.MarketMainFieldLevel[1].text = "Level " + itemData.factor.gunAtackPower;
-                }
-                break;
-            case 2:
-                if (gameManager.money >= itemData.fieldPrice.gunDistance)
-                {
-                    moneySystem.MoneyTextRevork(itemData.fieldPrice.gunDistance * -1);
-                    itemData.SetGunDistance();
-                    marketMainField.MarketMainFieldPrice[2].text = moneySystem.NumberTextRevork(itemData.fieldPrice.gunDistance);
-                    marketMainField.MarketMainFieldLevel[2].text = "Level " + itemData.factor.gunDistance;
-                }
-                break;
-            case 3:
-                if (gameManager.money >= itemData.fieldPrice.gunReloadTime)
-                {
-                    moneySystem.MoneyTextRevork((int)itemData.fieldPrice.gunReloadTime * -1);
-                    itemData.SetGunReloadTime();
-                    marketMainField.MarketMainFieldPrice[3].text = moneySystem.NumberTextRevork((int)itemData.fieldPrice.gunReloadTime);
-                    marketMainField.MarketMainFieldLevel[3].text = "Level " + itemData.factor.gunReloadTime;
-                }
-                break;
-        }
     }
     private void TextPlacement()
     {
         ItemData itemData = ItemData.Instance;
         MoneySystem moneySystem = MoneySystem.Instance;
 
-        marketMainField.MarketMainFieldPrice[0].text = moneySystem.NumberTextRevork(itemData.fieldPrice.castleHealth);
-        marketMainField.MarketMainFieldLevel[0].text = "Level " + itemData.factor.castleHealth;
-
-        marketMainField.MarketMainFieldPrice[1].text = moneySystem.NumberTextRevork(itemData.fieldPrice.gunAtackPower);
-        marketMainField.MarketMainFieldLevel[1].text = "Level " + itemData.factor.gunAtackPower;
-
-        marketMainField.MarketMainFieldPrice[2].text = moneySystem.NumberTextRevork(itemData.fieldPrice.gunDistance);
-        marketMainField.MarketMainFieldLevel[2].text = "Level " + itemData.factor.gunDistance;
-
-        marketMainField.MarketMainFieldPrice[3].text = moneySystem.NumberTextRevork((int)itemData.fieldPrice.gunReloadTime);
-        marketMainField.MarketMainFieldLevel[3].text = "Level " + itemData.factor.gunReloadTime;
     }
     private void MarketOnOffPlacement()
     {
