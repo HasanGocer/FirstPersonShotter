@@ -136,6 +136,7 @@ public class Buttons : MonoSingleton<Buttons>
         yield return new WaitForSeconds(1);
         _CountdownPanel.SetActive(false);
 
+        SpawnSystem.Instance.SpawnTime();
         ShotSystem.Instance.ShotSystemStart();
         //MarketSystem.Instance.GameStart();
     }

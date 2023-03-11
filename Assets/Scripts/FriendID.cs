@@ -8,7 +8,8 @@ public class FriendID : MonoBehaviour
     public CapsuleCollider capsuleCollider;
     public AnimController animController;
     public CharacterBar characterBar;
-    public GameObject hitPos;
+    public ClothesID clothesID;
+    public GameObject eyePosition;
     public bool isLive = true;
 
     public void FriendHealthStart()
