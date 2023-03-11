@@ -49,6 +49,7 @@ public class SpawnSystem : MonoSingleton<SpawnSystem>
 
         friendID.clothesID.StartClothesPlacement();
         StartCoroutine(SeenManager.Instance.FriendSeenMechanic(friend, friendID, friendID.eyePosition));
+        StartCoroutine(MoverSystem.Instance.FriendNPCMove(friend, friendID));
     }
 
     private void SelectRivalPosCount(out int rivalPosCount)
@@ -68,5 +69,6 @@ public class SpawnSystem : MonoSingleton<SpawnSystem>
 
         rivalID.clothesID.StartClothesPlacement();
         StartCoroutine(SeenManager.Instance.RivalSeenMechanic(rival, rivalID, rivalID.eyePosition));
+        StartCoroutine(MoverSystem.Instance.RivalNPCMove(rival, rivalID));
     }
 }

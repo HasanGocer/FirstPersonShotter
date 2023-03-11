@@ -11,6 +11,7 @@ public class RivalID : MonoBehaviour
     public ClothesID clothesID;
     public GameObject eyePosition;
     public bool isLive = true;
+    public bool isSeen;
 
     public void RivalIDStart()
     {

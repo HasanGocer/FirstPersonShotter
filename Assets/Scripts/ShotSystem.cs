@@ -25,11 +25,6 @@ public class ShotSystem : MonoSingleton<ShotSystem>
         _shotButton.onClick.AddListener(Hit);
     }
 
-    public void RivalNPCSearch()
-    {
-
-    }
-
     //Main karakterin Shot kodu
     private void Hit()
     {

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Wall
   - RivalPlayer
+  - FriendPlayer
   layers:
   - Default
   - TransparentFX
