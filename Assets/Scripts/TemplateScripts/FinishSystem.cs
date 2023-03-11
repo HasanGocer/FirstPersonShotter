@@ -7,24 +7,35 @@ public class FinishSystem : MonoSingleton<FinishSystem>
     [Header("Finish_Field")]
     [Space(10)]
 
-    int freeCount = 0;
+    public int friendCount = 5;
+    public int rivalCount = 5;
 
-    public void FinishCheck()
+    public void FriendDown()
     {
-        if (GameManager.Instance.gameStat == GameManager.GameStat.start)
-            FinishTime();
+        friendCount--;
+        if (friendCount <= 0)
+        {
+            //lose
+        }
     }
-    public void FinishTime()
+
+    public void RivalDown()
+    {
+        rivalCount--;
+        if (rivalCount <= 0 && GameManager.Instance.gameStat == GameManager.GameStat.start) FinishTime();
+    }
+
+    private void FinishTime()
     {
         GameManager gameManager = GameManager.Instance;
         Buttons buttons = Buttons.Instance;
         MoneySystem moneySystem = MoneySystem.Instance;
+        gameManager.gameStat = GameManager.GameStat.finish;
         StartCoroutine(BarSystem.Instance.BarImageFillAmountIenum());
         LevelManager.Instance.LevelCheck();
         buttons.winPanel.SetActive(true);
         buttons.barPanel.SetActive(true);
         buttons.finishGameMoneyText.text = moneySystem.NumberTextRevork(gameManager.addedMoney);
-        gameManager.gameStat = GameManager.GameStat.finish;
         moneySystem.MoneyTextRevork(gameManager.addedMoney);
     }
 }

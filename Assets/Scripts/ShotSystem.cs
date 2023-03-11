@@ -42,7 +42,9 @@ public class ShotSystem : MonoSingleton<ShotSystem>
     private void RivalHit(Vector3 hitPos, GameObject rival)
     {
         RivalID rivalID = rival.GetComponent<RivalID>();
+        ItemData.Field field = ItemData.Instance.field;
 
+        rivalID.characterBar.BarUpdate(field.rivalHealth, rivalID.rivalHealth, field.mainDamage);
         rivalID.rivalHealth -= ItemData.Instance.field.mainDamage;
         ParticalSystem.Instance.BodyShotPartical(hitPos);
     }

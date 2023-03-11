@@ -7,6 +7,7 @@ public class RivalID : MonoBehaviour
     public float rivalHealth;
     public CapsuleCollider capsuleCollider;
     public AnimController animController;
+    public CharacterBar characterBar;
     public GameObject hitPos;
     public bool isLive = true;
 

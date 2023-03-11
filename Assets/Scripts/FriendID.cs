@@ -7,6 +7,7 @@ public class FriendID : MonoBehaviour
     public float friendHealth;
     public CapsuleCollider capsuleCollider;
     public AnimController animController;
+    public CharacterBar characterBar;
     public GameObject hitPos;
     public bool isLive = true;
 

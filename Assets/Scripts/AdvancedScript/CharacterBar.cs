@@ -5,9 +5,17 @@ using UnityEngine.UI;
 
 public class CharacterBar : MonoBehaviour
 {
+    public enum CharacterStat
+    {
+        friend = 0,
+        rival = 1
+    }
+
+
+    public CharacterStat characterStat;
     [SerializeField] private Image bar;
 
-    public void BarUpdate(int max, int count, int down)
+    public void BarUpdate(float max, float count, float down)
     {
         float nowBar = count / max;
         float afterBar = (count - down) / max;
@@ -33,5 +41,7 @@ public class CharacterBar : MonoBehaviour
 
     private void FinishGame()
     {
+        if (characterStat == CharacterStat.rival) FinishSystem.Instance.RivalDown();
+        else FinishSystem.Instance.FriendDown();
     }
 }
