@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class SeenManager : MonoSingleton<SeenManager>
 {
     [SerializeField] float _hitDistance;
     [SerializeField] float _hitCountdawn;
+    [SerializeField] float _NPCTurnRivalTime;
 
     public IEnumerator RivalSeenMechanic(GameObject rival, RivalID rivalID, GameObject eyePosition)
     {
@@ -16,7 +18,17 @@ public class SeenManager : MonoSingleton<SeenManager>
             if (Physics.Raycast(eyePosition.transform.position, rival.transform.TransformDirection(Vector3.forward) * _hitDistance, out hit, _hitDistance))
                 if (hit.collider.gameObject.CompareTag("FriendPlayer"))
                 {
+                    GameObject friend = hit.collider.gameObject;
+                    FriendID friendID = friend.GetComponent<FriendID>();
+
                     StartCoroutine(RivalHit(hit.point, hit.collider.gameObject));
+
+                    if (!friendID.isSeen)
+                    {
+                        friendID.isSeen = true;
+                        friend.transform.DOLookAt(rival.transform.position, _NPCTurnRivalTime);
+                    }
+
                     yield return new WaitForSeconds(_hitCountdawn);
                 }
             yield return new WaitForEndOfFrame();
@@ -32,7 +44,17 @@ public class SeenManager : MonoSingleton<SeenManager>
             if (Physics.Raycast(eyePosition.transform.position, friend.transform.TransformDirection(Vector3.forward) * _hitDistance, out hit, _hitDistance))
                 if (hit.collider.gameObject.CompareTag("RivalPlayer"))
                 {
+                    GameObject rival = hit.collider.gameObject;
+                    RivalID rivalID = rival.GetComponent<RivalID>();
+
                     StartCoroutine(FriendHit(hit.point, hit.collider.gameObject));
+
+                    if (!rivalID.isSeen)
+                    {
+                        rivalID.isSeen = true;
+                        rival.transform.DOLookAt(friend.transform.position, _NPCTurnRivalTime);
+                    }
+
                     yield return new WaitForSeconds(_hitCountdawn);
                 }
             yield return new WaitForEndOfFrame();
@@ -63,5 +85,4 @@ public class SeenManager : MonoSingleton<SeenManager>
         yield return new WaitForSeconds(_hitCountdawn);
         friendID.isSeen = false;
     }
-
 }
