@@ -18,9 +18,6 @@ public class CharacterBar : MonoBehaviour
 
     public void BarUpdate(float max, float count, float down)
     {
-        print(max);
-        print(count);
-        print(down);
         float nowBar = count / max;
         float afterBar = (count - down) / max;
         StartCoroutine(BarUpdateIenumurator(nowBar, afterBar));
@@ -51,24 +48,30 @@ public class CharacterBar : MonoBehaviour
     }
     private void RivalDown()
     {
-        print("seeR");
-        RivalID rivalID = gameObject.GetComponent<RivalID>();
-        rivalID.isLive = false;
-        rivalID.animController.CallDeadAnim();
-        rivalID.capsuleCollider.enabled = false;
-        _barPanel.SetActive(false);
+        if (gameObject.GetComponent<RivalID>().isLive)
+        {
+            print("seeR");
+            RivalID rivalID = gameObject.GetComponent<RivalID>();
+            rivalID.isLive = false;
+            rivalID.animController.CallDeadAnim();
+            rivalID.capsuleCollider.enabled = false;
+            _barPanel.SetActive(false);
 
-        FinishSystem.Instance.RivalDown();
+            FinishSystem.Instance.RivalDown();
+        }
     }
     private void FriendDown()
     {
-        print("seeF");
-        FriendID friendID = gameObject.GetComponent<FriendID>();
-        friendID.isLive = false;
-        friendID.animController.CallDeadAnim();
-        friendID.capsuleCollider.enabled = false;
-        _barPanel.SetActive(false);
+        if (gameObject.GetComponent<FriendID>().isLive)
+        {
+            print("seeF");
+            FriendID friendID = gameObject.GetComponent<FriendID>();
+            friendID.isLive = false;
+            friendID.animController.CallDeadAnim();
+            friendID.capsuleCollider.enabled = false;
+            _barPanel.SetActive(false);
 
-        FinishSystem.Instance.FriendDown();
+            FinishSystem.Instance.FriendDown();
+        }
     }
 }

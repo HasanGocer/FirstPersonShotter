@@ -340,7 +340,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 155db2b6d8a2a6642845efae7a2f1111, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterStat: 0
+  characterStat: 1
   _bar: {fileID: 1837104701383376987}
   _barPanel: {fileID: 2536744680257453219}
 --- !u!114 &929468296608419887
