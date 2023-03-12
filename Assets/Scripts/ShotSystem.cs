@@ -13,12 +13,6 @@ public class ShotSystem : MonoSingleton<ShotSystem>
     [SerializeField] GameObject _shotPanel;
     [SerializeField] Button _shotButton;
 
-    [Header("Rival_Field")]
-    [Space(10)]
-
-    [SerializeField] float _rivalDistance;
-    [SerializeField] int _raycastCount;
-
     public void ShotSystemStart()
     {
         _shotPanel.SetActive(true);
