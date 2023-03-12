@@ -1,68 +1,57 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField]
-    private float movementSpeed;
-    [SerializeField]
-    private float rotationSpeed;
+    public Joystick joystick; // Joystick nesnesi
+    public float speed = 5f; // Hareket hýzý
+    public float rotationSpeed = 100f; // Dönüþ hýzý
+    private Rigidbody rb;
+    private Touch touch;
 
-    Touch touch;
-
-    private Vector3 touchDown,touchUp;
-
-    private bool dragStarted, isMoving;
-
-    void Update()
+    void Start()
     {
-        Movement();
+        rb = GetComponent<Rigidbody>();
+        joystick = MainManager.Instance.joystick;
     }
 
-    void Movement()
+    void FixedUpdate()
     {
         if (Input.touchCount > 0)
         {
             touch = Input.GetTouch(0);
             if (touch.phase == TouchPhase.Began)
             {
-                dragStarted = true;
-                isMoving = true;
-                touchDown = touch.position;
-                touchUp = touch.position;
+                joystick.gameObject.SetActive(true);
+                joystick.transform.position = touch.position;
+                joystick.transform.rotation = Quaternion.identity;
             }
-        }
-        if (dragStarted)
-        {
             if (touch.phase == TouchPhase.Moved)
             {
-                touchDown = touch.position;
+                PointerEventData eventData = new PointerEventData(EventSystem.current);
+                eventData.position = touch.position;
+                joystick.OnPointerDown(eventData);
             }
-
             if (touch.phase == TouchPhase.Ended)
             {
-                touchDown = touch.position;
-                isMoving = false;
-                dragStarted = false;
+                joystick.OnPointerUp(new PointerEventData(EventSystem.current));
+                joystick.gameObject.SetActive(false);
             }
 
-            gameObject.transform.rotation = Quaternion.RotateTowards(transform.rotation, CalculateRotation(), rotationSpeed * Time.deltaTime);
-            gameObject.transform.Translate(Vector3.forward * Time.deltaTime * movementSpeed);
+            // Joystick ile karakterin hareketi
+            float horizontalInput = joystick.Horizontal;
+            float verticalInput = joystick.Vertical;
+
+            Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput);
+            movement.Normalize();
+
+            rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
+
+            // Joystick ile karakterin dönüþü
+            float rotateInput = joystick.Horizontal;
+
+            Vector3 rotation = new Vector3(0f, rotateInput, 0f);
+            rb.MoveRotation(rb.rotation * Quaternion.Euler(rotation * rotationSpeed * Time.fixedDeltaTime));
         }
-    }
-
-    Quaternion CalculateRotation()
-    {
-        Quaternion temp = Quaternion.LookRotation(CalculateDirection(), Vector3.up);
-        return temp;
-    }
-
-    Vector3 CalculateDirection()
-    {
-        Vector3 temp = (touchDown - touchUp).normalized;
-        temp.z = temp.y;
-        temp.y = 0;
-        return temp;
     }
 }

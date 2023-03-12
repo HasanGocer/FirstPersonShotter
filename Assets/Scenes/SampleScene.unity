@@ -3359,6 +3359,7 @@ MonoBehaviour:
   _hitDistance: 10
   _hitCountdawn: 0.5
   _NPCTurnRivalTime: 1
+  _hitCount: 0
 --- !u!114 &1867153559
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3398,12 +3399,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1913752731}
-  - component: {fileID: 1913752732}
-  - component: {fileID: 1913752733}
   - component: {fileID: 1913752734}
   - component: {fileID: 1913752737}
   - component: {fileID: 1913752736}
   - component: {fileID: 1913752735}
+  - component: {fileID: 1913752738}
   m_Layer: 0
   m_Name: Player
   m_TagString: FriendPlayer
@@ -3436,36 +3436,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1913752732
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1913752730}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed9d0408b94492a4097b5972587dd805, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 10
-  rotateSpeed: 10
---- !u!114 &1913752733
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1913752730}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d551617658ae3a458689ea807d98b8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  detectionRadius: 20
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!54 &1913752734
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3550,6 +3520,21 @@ MonoBehaviour:
   death: {fileID: -203655887218126122, guid: d880c34e7d97a3c4db681000e5490972, type: 3}
   "\u0131dle": {fileID: -203655887218126122, guid: ea8f128b20fd25a4091af82f709aff0a,
     type: 3}
+--- !u!114 &1913752738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1913752730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87baaf4cca14ec541b2a0f9beda5add3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  joystick: {fileID: 1506872443}
+  speed: 5
+  rotationSpeed: 100
 --- !u!1 &1985329667 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2692723895300367804, guid: cd1eb1d571ee6d34cb359c70adce3c8c,

@@ -9,35 +9,41 @@ public class SeenManager : MonoSingleton<SeenManager>
     [SerializeField] float _hitDistance;
     [SerializeField] float _hitCountdawn;
     [SerializeField] float _NPCTurnRivalTime;
+    [SerializeField] int _hitCount;
 
     public IEnumerator RivalSeenMechanic(GameObject rival, RivalID rivalID, GameObject eyePosition)
     {
-        RaycastHit hit;
         NavMeshAgent navMeshAgent = rival.GetComponent<NavMeshAgent>();
+        RaycastHit hit;
 
         while (rivalID.isLive)
         {
-            if (Physics.Raycast(eyePosition.transform.position, rival.transform.TransformDirection(Vector3.forward) * _hitDistance, out hit, _hitDistance))
-                if (hit.collider.gameObject.CompareTag("FriendPlayer"))
-                {
-                    GameObject friend = hit.collider.gameObject;
-                    FriendID friendID = friend.GetComponent<FriendID>();
-                    NavMeshAgent navMeshAgent1 = friend.GetComponent<NavMeshAgent>();
-
-                    navMeshAgent.isStopped = true;
-
-                    StartCoroutine(RivalHit(hit.point, hit.collider.gameObject));
-
-                    if (!friendID.isSeen)
+            for (int i = -1 * _hitCount; i < _hitCount; i++)
+            {
+                Debug.DrawRay(eyePosition.transform.position, rival.transform.TransformDirection(Vector3.forward + new Vector3(0.01f * i, 0, 0)) * _hitDistance, Color.red, 1);
+                if (Physics.Raycast(eyePosition.transform.position, rival.transform.TransformDirection(Vector3.forward + new Vector3(0.1f * i, 0, 0)) * _hitDistance, out hit, _hitDistance))
+                    if (hit.collider.gameObject.CompareTag("FriendPlayer"))
                     {
-                        navMeshAgent1.isStopped = true;
-                        friendID.isSeen = true;
-                        friend.transform.DOLookAt(rival.transform.position, _NPCTurnRivalTime);
-                    }
+                        GameObject friend = hit.collider.gameObject;
+                        FriendID friendID = friend.GetComponent<FriendID>();
+                        NavMeshAgent navMeshAgent1 = friend.GetComponent<NavMeshAgent>();
 
-                    yield return new WaitForSeconds(_hitCountdawn);
-                    navMeshAgent.isStopped = false;
-                }
+                        navMeshAgent.isStopped = true;
+
+                        StartCoroutine(RivalHit(hit.point, hit.collider.gameObject));
+
+                        if (!friendID.isSeen)
+                        {
+                            navMeshAgent1.isStopped = true;
+                            friendID.isSeen = true;
+                            friend.transform.DOLookAt(rival.transform.position, _NPCTurnRivalTime);
+                        }
+
+                        yield return new WaitForSeconds(_hitCountdawn);
+                    }
+                yield return null;
+            }
+
             yield return new WaitForEndOfFrame();
         }
     }
@@ -50,27 +56,31 @@ public class SeenManager : MonoSingleton<SeenManager>
 
         while (friendID.isLive)
         {
-            if (Physics.Raycast(eyePosition.transform.position, friend.transform.TransformDirection(Vector3.forward) * _hitDistance, out hit, _hitDistance))
-                if (hit.collider.gameObject.CompareTag("RivalPlayer"))
-                {
-                    GameObject rival = hit.collider.gameObject;
-                    RivalID rivalID = rival.GetComponent<RivalID>();
-                    NavMeshAgent navMeshAgent1 = rival.GetComponent<NavMeshAgent>();
-
-                    navMeshAgent.isStopped = true;
-
-                    StartCoroutine(FriendHit(hit.point, hit.collider.gameObject));
-
-                    if (!rivalID.isSeen)
+            for (int i = -1 * _hitCount; i < _hitCount; i++)
+            {
+                if (Physics.Raycast(eyePosition.transform.position, friend.transform.TransformDirection(Vector3.forward) * _hitDistance, out hit, _hitDistance))
+                    if (hit.collider.gameObject.CompareTag("RivalPlayer"))
                     {
-                        navMeshAgent1.isStopped = true;
-                        rivalID.isSeen = true;
-                        rival.transform.DOLookAt(friend.transform.position, _NPCTurnRivalTime);
-                    }
+                        GameObject rival = hit.collider.gameObject;
+                        RivalID rivalID = rival.GetComponent<RivalID>();
+                        NavMeshAgent navMeshAgent1 = rival.GetComponent<NavMeshAgent>();
 
-                    yield return new WaitForSeconds(_hitCountdawn);
-                    navMeshAgent.isStopped = false;
-                }
+                        navMeshAgent.isStopped = true;
+
+                        StartCoroutine(FriendHit(hit.point, hit.collider.gameObject));
+
+                        if (!rivalID.isSeen)
+                        {
+                            navMeshAgent1.isStopped = true;
+                            rivalID.isSeen = true;
+                            rival.transform.DOLookAt(friend.transform.position, _NPCTurnRivalTime);
+                        }
+
+                        yield return new WaitForSeconds(_hitCountdawn);
+                    }
+                yield return null;
+            }
+
             yield return new WaitForEndOfFrame();
         }
     }
