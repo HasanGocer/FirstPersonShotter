@@ -6,7 +6,6 @@ using UnityEngine.Rendering;
 public class MainManager : MonoSingleton<MainManager>
 {
     public GameObject mainPlayer;
-    public GameObject hitPos;
     public AnimController animController;
     public Joystick joystick;
     public float mainHealth;

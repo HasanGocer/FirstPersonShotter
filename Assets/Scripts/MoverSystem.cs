@@ -11,7 +11,7 @@ public class MoverSystem : MonoSingleton<MoverSystem>
     public IEnumerator RivalNPCMove(GameObject rival, RivalID rivalID)
     {
         NavMeshAgent navMeshAgent = rival.GetComponent<NavMeshAgent>();
-        Vector3 target = GetRandomPoint(rival);
+        Vector3 target = GetRandomPoint(navMeshAgent);
 
         while (rivalID.isLive)
         {
@@ -21,7 +21,7 @@ public class MoverSystem : MonoSingleton<MoverSystem>
                 yield return new WaitForEndOfFrame();
                 if (_NPCMinDistance > Vector3.Distance(rival.transform.position, target))
                 {
-                    target = GetRandomPoint(rival);
+                    target = GetRandomPoint(navMeshAgent);
                     yield return new WaitForSeconds(_NPCMoveFinishCountdown);
                 }
             }
@@ -31,17 +31,18 @@ public class MoverSystem : MonoSingleton<MoverSystem>
     public IEnumerator FriendNPCMove(GameObject friend, FriendID friendID)
     {
         NavMeshAgent navMeshAgent = friend.GetComponent<NavMeshAgent>();
-        Vector3 target = GetRandomPoint(friend);
+        Vector3 target = GetRandomPoint(navMeshAgent);
 
         while (friendID.isLive)
         {
             if (!friendID.isSeen)
             {
+                print(13);
                 navMeshAgent.destination = target;
                 yield return new WaitForEndOfFrame();
                 if (_NPCMinDistance > Vector3.Distance(friend.transform.position, target))
                 {
-                    target = GetRandomPoint(friend);
+                    target = GetRandomPoint(navMeshAgent);
                     yield return new WaitForSeconds(_NPCMoveFinishCountdown);
                 }
             }
@@ -49,14 +50,13 @@ public class MoverSystem : MonoSingleton<MoverSystem>
         }
     }
 
-    private Vector3 GetRandomPoint(GameObject NPC)
+    private Vector3 GetRandomPoint(NavMeshAgent agent)
     {
+        print(31);
         Vector3 randomPoint = Vector3.zero;
         NavMeshHit hit;
-        if (NavMesh.SamplePosition(NPC.transform.position, out hit, 10.0f, NavMesh.AllAreas))
-        {
+        if (NavMesh.SamplePosition(agent.transform.position, out hit, agent.radius * 2.0f, agent.areaMask))
             randomPoint = hit.position;
-        }
         return randomPoint;
     }
 }
