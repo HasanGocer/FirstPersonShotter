@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.AI;
 
 public class CharacterBar : MonoBehaviour
 {
@@ -52,6 +53,9 @@ public class CharacterBar : MonoBehaviour
         {
             print("seeR");
             RivalID rivalID = gameObject.GetComponent<RivalID>();
+            NavMeshAgent navMeshAgent = gameObject.GetComponent<NavMeshAgent>();
+
+            navMeshAgent.isStopped = true;
             rivalID.isLive = false;
             rivalID.animController.CallDeadAnim();
             rivalID.capsuleCollider.enabled = false;
@@ -66,6 +70,9 @@ public class CharacterBar : MonoBehaviour
         {
             print("seeF");
             FriendID friendID = gameObject.GetComponent<FriendID>();
+            NavMeshAgent navMeshAgent = gameObject.GetComponent<NavMeshAgent>();
+
+            navMeshAgent.isStopped = true;
             friendID.isLive = false;
             friendID.animController.CallDeadAnim();
             friendID.capsuleCollider.enabled = false;

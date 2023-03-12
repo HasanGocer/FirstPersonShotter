@@ -28,7 +28,10 @@ public class MoverSystem : MonoSingleton<MoverSystem>
                     rivalID.animController.CallWalkAnim();
                 }
             }
-            else yield return new WaitForEndOfFrame();
+            else
+            {
+                yield return new WaitForEndOfFrame();
+            }
         }
     }
     public IEnumerator FriendNPCMove(GameObject friend, FriendID friendID)
@@ -51,7 +54,10 @@ public class MoverSystem : MonoSingleton<MoverSystem>
                     friendID.animController.CallWalkAnim();
                 }
             }
-            else yield return new WaitForEndOfFrame();
+            else
+            {
+                yield return new WaitForEndOfFrame();
+            }
         }
     }
 
