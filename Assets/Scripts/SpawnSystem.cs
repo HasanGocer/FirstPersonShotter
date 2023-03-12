@@ -47,6 +47,7 @@ public class SpawnSystem : MonoSingleton<SpawnSystem>
     {
         FriendID friendID = friend.GetComponent<FriendID>();
 
+        friendID.FriendHealthStart();
         friendID.clothesID.StartClothesPlacement();
         StartCoroutine(SeenManager.Instance.FriendSeenMechanic(friend, friendID, friendID.eyePosition));
         StartCoroutine(MoverSystem.Instance.FriendNPCMove(friend, friendID));
@@ -67,6 +68,7 @@ public class SpawnSystem : MonoSingleton<SpawnSystem>
     {
         RivalID rivalID = rival.GetComponent<RivalID>();
 
+        rivalID.RivalIDStart();
         rivalID.clothesID.StartClothesPlacement();
         StartCoroutine(SeenManager.Instance.RivalSeenMechanic(rival, rivalID, rivalID.eyePosition));
         StartCoroutine(MoverSystem.Instance.RivalNPCMove(rival, rivalID));

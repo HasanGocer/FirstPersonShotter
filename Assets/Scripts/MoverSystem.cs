@@ -12,51 +12,57 @@ public class MoverSystem : MonoSingleton<MoverSystem>
     {
         NavMeshAgent navMeshAgent = rival.GetComponent<NavMeshAgent>();
         Vector3 target = GetRandomPoint(navMeshAgent);
+        rivalID.animController.CallWalkAnim();
 
         while (rivalID.isLive)
         {
             if (!rivalID.isSeen)
             {
                 navMeshAgent.destination = target;
-                yield return new WaitForEndOfFrame();
+                yield return new WaitForSeconds(Time.deltaTime);
                 if (_NPCMinDistance > Vector3.Distance(rival.transform.position, target))
                 {
+                    rivalID.animController.CallIdleAnim();
                     target = GetRandomPoint(navMeshAgent);
                     yield return new WaitForSeconds(_NPCMoveFinishCountdown);
+                    rivalID.animController.CallWalkAnim();
                 }
             }
-            yield return new WaitForEndOfFrame();
+            else yield return new WaitForEndOfFrame();
         }
     }
     public IEnumerator FriendNPCMove(GameObject friend, FriendID friendID)
     {
         NavMeshAgent navMeshAgent = friend.GetComponent<NavMeshAgent>();
         Vector3 target = GetRandomPoint(navMeshAgent);
+        friendID.animController.CallWalkAnim();
 
         while (friendID.isLive)
         {
             if (!friendID.isSeen)
             {
-                print(13);
                 navMeshAgent.destination = target;
-                yield return new WaitForEndOfFrame();
+                yield return new WaitForSeconds(Time.deltaTime);
                 if (_NPCMinDistance > Vector3.Distance(friend.transform.position, target))
                 {
+                    friendID.animController.CallIdleAnim();
                     target = GetRandomPoint(navMeshAgent);
                     yield return new WaitForSeconds(_NPCMoveFinishCountdown);
+                    friendID.animController.CallWalkAnim();
                 }
             }
-            yield return new WaitForEndOfFrame();
+            else yield return new WaitForEndOfFrame();
         }
     }
 
     private Vector3 GetRandomPoint(NavMeshAgent agent)
     {
-        print(31);
         Vector3 randomPoint = Vector3.zero;
         NavMeshHit hit;
-        if (NavMesh.SamplePosition(agent.transform.position, out hit, agent.radius * 2.0f, agent.areaMask))
-            randomPoint = hit.position;
+        Vector3 randomPosition = agent.transform.position + Random.insideUnitSphere * 10.0f;
+
+        while (!NavMesh.SamplePosition(new Vector3(Random.Range(-50, 50), agent.transform.position.y, Random.Range(-50, 50)), out hit, agent.radius, agent.walkableMask)) ;
+        randomPoint = hit.position;
         return randomPoint;
     }
 }

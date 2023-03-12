@@ -67,8 +67,8 @@ public class SeenManager : MonoSingleton<SeenManager>
         ItemData.Field field = ItemData.Instance.field;
 
         rivalID.isSeen = true;
-        rivalID.rivalHealth -= field.mainDamage;
         rivalID.characterBar.BarUpdate(field.rivalHealth, rivalID.rivalHealth, field.mainDamage);
+        rivalID.rivalHealth -= field.mainDamage;
         ParticalSystem.Instance.BodyShotPartical(hitPos);
         yield return new WaitForSeconds(_hitCountdawn);
         rivalID.isSeen = false;
@@ -79,8 +79,8 @@ public class SeenManager : MonoSingleton<SeenManager>
         ItemData.Field field = ItemData.Instance.field;
 
         friendID.isSeen = true;
-        friendID.friendHealth -= field.rivalDamage;
         friendID.characterBar.BarUpdate(field.mainHealth, friendID.friendHealth, field.rivalDamage);
+        friendID.friendHealth -= field.rivalDamage;
         ParticalSystem.Instance.BodyShotPartical(hitPos);
         yield return new WaitForSeconds(_hitCountdawn);
         friendID.isSeen = false;

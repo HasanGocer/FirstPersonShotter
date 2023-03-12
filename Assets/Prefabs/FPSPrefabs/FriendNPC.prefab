@@ -244,7 +244,7 @@ GameObject:
   - component: {fileID: 3520499014203902416}
   m_Layer: 0
   m_Name: FriendNPC
-  m_TagString: Untagged
+  m_TagString: FriendPlayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -343,7 +343,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterStat: 0
-  bar: {fileID: 4097103849021605701}
+  _bar: {fileID: 4097103849021605701}
+  _barPanel: {fileID: 184983042830564285}
 --- !u!114 &3168538810157959601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -382,18 +383,18 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
+  m_Speed: 7
+  m_Acceleration: 20
+  avoidancePriority: 99
   m_AngularSpeed: 120
   m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
+  m_AutoTraverseOffMeshLink: 0
+  m_AutoBraking: 0
+  m_AutoRepath: 0
   m_Height: 2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 1
 --- !u!1 &3168538810349416867
 GameObject:
   m_ObjectHideFlags: 0
@@ -1513,6 +1514,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36a60fd59750a5746a77d862e198d686, type: 3}
+--- !u!1 &184983042830564285 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2984154109332420102, guid: 36a60fd59750a5746a77d862e198d686,
+    type: 3}
+  m_PrefabInstance: {fileID: 3168538811368279483}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &936303738197708780 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2812077991994065495, guid: 36a60fd59750a5746a77d862e198d686,

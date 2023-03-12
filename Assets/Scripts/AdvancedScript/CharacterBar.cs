@@ -13,10 +13,14 @@ public class CharacterBar : MonoBehaviour
 
 
     public CharacterStat characterStat;
-    [SerializeField] private Image bar;
+    [SerializeField] private Image _bar;
+    [SerializeField] private GameObject _barPanel;
 
     public void BarUpdate(float max, float count, float down)
     {
+        print(max);
+        print(count);
+        print(down);
         float nowBar = count / max;
         float afterBar = (count - down) / max;
         StartCoroutine(BarUpdateIenumurator(nowBar, afterBar));
@@ -29,19 +33,42 @@ public class CharacterBar : MonoBehaviour
         while (true)
         {
             temp += Time.deltaTime;
-            bar.fillAmount = Mathf.Lerp(start, finish, temp);
+            _bar.fillAmount = Mathf.Lerp(start, finish, temp);
             yield return new WaitForEndOfFrame();
-            if (bar.fillAmount == finish)
+            if (_bar.fillAmount == 0)
             {
                 FinishGame();
                 break;
             }
+            if (_bar.fillAmount == finish) break;
         }
     }
 
     private void FinishGame()
     {
-        if (characterStat == CharacterStat.rival) FinishSystem.Instance.RivalDown();
-        else FinishSystem.Instance.FriendDown();
+        if (characterStat == CharacterStat.rival) RivalDown();
+        else FriendDown();
+    }
+    private void RivalDown()
+    {
+        print("seeR");
+        RivalID rivalID = gameObject.GetComponent<RivalID>();
+        rivalID.isLive = false;
+        rivalID.animController.CallDeadAnim();
+        rivalID.capsuleCollider.enabled = false;
+        _barPanel.SetActive(false);
+
+        FinishSystem.Instance.RivalDown();
+    }
+    private void FriendDown()
+    {
+        print("seeF");
+        FriendID friendID = gameObject.GetComponent<FriendID>();
+        friendID.isLive = false;
+        friendID.animController.CallDeadAnim();
+        friendID.capsuleCollider.enabled = false;
+        _barPanel.SetActive(false);
+
+        FinishSystem.Instance.FriendDown();
     }
 }

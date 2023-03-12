@@ -242,7 +242,7 @@ GameObject:
   - component: {fileID: 4425450118054600373}
   m_Layer: 0
   m_Name: RivalNPC
-  m_TagString: Untagged
+  m_TagString: RivalPlayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -341,7 +341,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterStat: 0
-  bar: {fileID: 1837104701383376987}
+  _bar: {fileID: 1837104701383376987}
+  _barPanel: {fileID: 2536744680257453219}
 --- !u!114 &929468296608419887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -380,18 +381,18 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
+  m_Speed: 7
+  m_Acceleration: 20
+  avoidancePriority: 99
   m_AngularSpeed: 120
   m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
+  m_AutoTraverseOffMeshLink: 0
+  m_AutoBraking: 0
+  m_AutoRepath: 0
   m_Height: 2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 1
 --- !u!1 &7495589150649340847
 GameObject:
   m_ObjectHideFlags: 0
@@ -834,6 +835,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2536744680257453219 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2984154109332420102, guid: 36a60fd59750a5746a77d862e198d686,
+    type: 3}
+  m_PrefabInstance: {fileID: 746906506785229477}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &3268216444388411634 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2812077991994065495, guid: 36a60fd59750a5746a77d862e198d686,
