@@ -44,6 +44,7 @@ public class PlayerMovement : MonoBehaviour
 
             Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput);
             movement.Normalize();
+            MainManager.Instance.mainPlayer.transform.TransformDirection(movement);
 
             rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
 

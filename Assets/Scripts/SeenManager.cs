@@ -32,10 +32,19 @@ public class SeenManager : MonoSingleton<SeenManager>
                         targetRivalHit = hit;
 
                         yield return new WaitForEndOfFrame();
+                        break;
+                    }
+                    else if (hit.collider.gameObject.CompareTag("Player"))
+                    {
+                        yield return new WaitForSeconds(_hitCountdawn);
                     }
                 yield return null;
             }
-            if (target != null) RivalSelect(targetRivalHit, navMeshAgent, rival);
+            if (target != null)
+            {
+                RivalSelect(targetRivalHit, navMeshAgent, rival);
+                yield return new WaitForSeconds(_hitCountdawn);
+            }
 
             yield return new WaitForEndOfFrame();
         }
@@ -62,10 +71,15 @@ public class SeenManager : MonoSingleton<SeenManager>
                         targetFriendHit = hit;
 
                         yield return new WaitForEndOfFrame();
+                        break;
                     }
                 yield return null;
             }
-            if (target != null) FriendSelect(targetFriendHit, navMeshAgent, friend);
+            if (target != null)
+            {
+                FriendSelect(targetFriendHit, navMeshAgent, friend);
+                yield return new WaitForSeconds(_hitCountdawn);
+            }
 
             yield return new WaitForEndOfFrame();
         }
