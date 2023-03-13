@@ -30,21 +30,29 @@ public class SeenManager : MonoSingleton<SeenManager>
                     {
                         target = hit.collider.gameObject;
                         targetRivalHit = hit;
-
-                        yield return new WaitForEndOfFrame();
                         break;
                     }
                     else if (hit.collider.gameObject.CompareTag("Player"))
                     {
+                        ItemData.Field field = ItemData.Instance.field;
+
+                        navMeshAgent.isStopped = true;
+
+                        rivalID.characterBar.BarUpdate(field.mainHealth, MainManager.Instance.mainHealth, field.rivalDamage);
+                        MainManager.Instance.mainHealth -= field.rivalDamage;
+                        ParticalSystem.Instance.BodyShotPartical(hit.point);
+                        target = null;
                         yield return new WaitForSeconds(_hitCountdawn);
+                        break;
                     }
                 yield return null;
             }
             if (target != null)
             {
-                RivalSelect(targetRivalHit, navMeshAgent, rival);
+                RivalSelect(targetRivalHit, navMeshAgent, rival, rivalID);
                 yield return new WaitForSeconds(_hitCountdawn);
             }
+            else navMeshAgent.isStopped = false;
 
             yield return new WaitForEndOfFrame();
         }
@@ -55,7 +63,6 @@ public class SeenManager : MonoSingleton<SeenManager>
         RaycastHit hit;
         NavMeshAgent navMeshAgent = friend.GetComponent<NavMeshAgent>();
         GameObject target;
-
 
         while (friendID.isLive)
         {
@@ -69,23 +76,22 @@ public class SeenManager : MonoSingleton<SeenManager>
                     {
                         target = hit.collider.gameObject;
                         targetFriendHit = hit;
-
-                        yield return new WaitForEndOfFrame();
                         break;
                     }
                 yield return null;
             }
             if (target != null)
             {
-                FriendSelect(targetFriendHit, navMeshAgent, friend);
+                FriendSelect(targetFriendHit, navMeshAgent, friend, friendID);
                 yield return new WaitForSeconds(_hitCountdawn);
             }
+            else navMeshAgent.isStopped = false;
 
             yield return new WaitForEndOfFrame();
         }
     }
 
-    private IEnumerator FriendHit(Vector3 hitPos, GameObject rival)
+    private IEnumerator FriendHit(Vector3 hitPos, GameObject rival, FriendID friendID)
     {
         RivalID rivalID = rival.GetComponent<RivalID>();
         ItemData.Field field = ItemData.Instance.field;
@@ -96,8 +102,9 @@ public class SeenManager : MonoSingleton<SeenManager>
         ParticalSystem.Instance.BodyShotPartical(hitPos);
         yield return new WaitForSeconds(_hitCountdawn);
         rivalID.isSeen = false;
+        friendID.isSeen = false;
     }
-    private IEnumerator RivalHit(Vector3 hitPos, GameObject friend)
+    private IEnumerator RivalHit(Vector3 hitPos, GameObject friend, RivalID rivalID)
     {
         FriendID friendID = friend.GetComponent<FriendID>();
         ItemData.Field field = ItemData.Instance.field;
@@ -108,16 +115,18 @@ public class SeenManager : MonoSingleton<SeenManager>
         ParticalSystem.Instance.BodyShotPartical(hitPos);
         yield return new WaitForSeconds(_hitCountdawn);
         friendID.isSeen = false;
+        rivalID.isSeen = false;
     }
-    private void RivalSelect(RaycastHit hit, NavMeshAgent navMeshAgent, GameObject rival)
+    private void RivalSelect(RaycastHit hit, NavMeshAgent navMeshAgent, GameObject rival, RivalID rivalID)
     {
         GameObject friend = hit.collider.gameObject;
         FriendID friendID = friend.GetComponent<FriendID>();
         NavMeshAgent navMeshAgent1 = friend.GetComponent<NavMeshAgent>();
 
+        rivalID.isSeen = true;
         navMeshAgent.isStopped = true;
 
-        StartCoroutine(RivalHit(hit.point, friend));
+        StartCoroutine(RivalHit(hit.point, friend, rivalID));
 
         if (!friendID.isSeen)
         {
@@ -126,15 +135,16 @@ public class SeenManager : MonoSingleton<SeenManager>
             friend.transform.DOLookAt(rival.transform.position, _NPCTurnRivalTime);
         }
     }
-    private void FriendSelect(RaycastHit hit, NavMeshAgent navMeshAgent, GameObject friend)
+    private void FriendSelect(RaycastHit hit, NavMeshAgent navMeshAgent, GameObject friend, FriendID friendID)
     {
         GameObject rival = hit.collider.gameObject;
         RivalID rivalID = rival.GetComponent<RivalID>();
         NavMeshAgent navMeshAgent1 = rival.GetComponent<NavMeshAgent>();
 
+        friendID.isSeen = true;
         navMeshAgent.isStopped = true;
 
-        StartCoroutine(FriendHit(hit.point, hit.collider.gameObject));
+        StartCoroutine(FriendHit(hit.point, hit.collider.gameObject, friendID));
 
         if (!rivalID.isSeen)
         {

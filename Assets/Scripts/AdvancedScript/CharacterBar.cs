@@ -9,7 +9,8 @@ public class CharacterBar : MonoBehaviour
     public enum CharacterStat
     {
         friend = 0,
-        rival = 1
+        rival = 1,
+        main = 2
     }
 
 
@@ -45,7 +46,8 @@ public class CharacterBar : MonoBehaviour
     private void FinishGame()
     {
         if (characterStat == CharacterStat.rival) RivalDown();
-        else FriendDown();
+        else if (characterStat == CharacterStat.friend) FriendDown();
+        else PlayerDown();
     }
     private void RivalDown()
     {
@@ -72,11 +74,20 @@ public class CharacterBar : MonoBehaviour
 
             navMeshAgent.isStopped = true;
             friendID.isLive = false;
+
             friendID.animController.CallDeadAnim();
             friendID.capsuleCollider.enabled = false;
             _barPanel.SetActive(false);
 
             FinishSystem.Instance.FriendDown();
+        }
+    }
+    private void PlayerDown()
+    {
+        if (GameManager.Instance.gameStat == GameManager.GameStat.start)
+        {
+            GameManager.Instance.gameStat = GameManager.GameStat.finish;
+            //fail
         }
     }
 }
