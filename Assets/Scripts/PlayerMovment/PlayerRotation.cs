@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerRotation : MonoBehaviour
 {
     [SerializeField] private float sensitivity = 2.0f; // Kamera hassasiyeti
+    [SerializeField] private float xdistance;
     private Vector2 lastTouchPosition; // Son dokunma konumu
     private bool isDragging = false; // Dokunma sürüklendi mi kontrolü
     private float dragTimeThreshold = 0.2f; // Sürükleme hareketinin algýlanma süresi eþiði
@@ -38,10 +39,15 @@ public class PlayerRotation : MonoBehaviour
                 case TouchPhase.Moved:
                     // Kamera rotasyonu hesaplanýr ve uygulanýr
                     Vector2 delta = touch.position - lastTouchPosition;
+
+                    float xRot = transform.eulerAngles.x - delta.y * sensitivity;
+                    print(xRot);
+                    xRot = Mathf.Clamp(xRot, -xdistance, xdistance);
+                    if (xRot < 0) xRot -= 360;
                     transform.eulerAngles = new Vector3(
-                        transform.eulerAngles.x/* - delta.y * sensitivity*/,
+                       xRot,
                         transform.eulerAngles.y + delta.x * sensitivity,
-                        0f);
+                        0f); ;
                     lastTouchPosition = touch.position;
                     break;
 

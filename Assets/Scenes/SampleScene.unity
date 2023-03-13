@@ -3516,8 +3516,8 @@ MonoBehaviour:
   _friendBool: 0000000000
   _OPRivalCount: 5
   _OPFriendCount: 6
-  friendSpawnCount: 4
-  rivalSpawnCount: 5
+  friendSpawnCount: 1
+  rivalSpawnCount: 1
 --- !u!1 &1913752730
 GameObject:
   m_ObjectHideFlags: 0
@@ -3536,7 +3536,7 @@ GameObject:
   - component: {fileID: 1913752740}
   m_Layer: 0
   m_Name: Player
-  m_TagString: FriendPlayer
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3684,7 +3684,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c668475eebd42d4b8821e678c546e2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensitivity: 2
+  sensitivity: 0.1
+  xdistance: 30
 --- !u!1 &1985329667 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2692723895300367804, guid: cd1eb1d571ee6d34cb359c70adce3c8c,
