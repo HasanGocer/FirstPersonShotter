@@ -1759,7 +1759,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gunPos: {fileID: 870867547}
-  _hitDistance: 10
+  _hitDistance: 20
   _shotPanel: {fileID: 1710591142}
   _shotButton: {fileID: 1710591141}
 --- !u!1 &832575517
@@ -3426,7 +3426,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 049e1c7042e9a174d9ed026151a25076, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hitDistance: 10
+  _hitDistance: 20
   _hitCountdawn: 0.5
   _NPCTurnRivalTime: 1
   _hitCount: 6

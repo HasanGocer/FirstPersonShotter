@@ -51,7 +51,6 @@ public class CharacterBar : MonoBehaviour
     {
         if (gameObject.GetComponent<RivalID>().isLive)
         {
-            print("seeR");
             RivalID rivalID = gameObject.GetComponent<RivalID>();
             NavMeshAgent navMeshAgent = gameObject.GetComponent<NavMeshAgent>();
 
@@ -68,7 +67,6 @@ public class CharacterBar : MonoBehaviour
     {
         if (gameObject.GetComponent<FriendID>().isLive)
         {
-            print("seeF");
             FriendID friendID = gameObject.GetComponent<FriendID>();
             NavMeshAgent navMeshAgent = gameObject.GetComponent<NavMeshAgent>();
 
