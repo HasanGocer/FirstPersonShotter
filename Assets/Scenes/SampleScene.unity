@@ -3533,8 +3533,8 @@ MonoBehaviour:
   _friendBool: 0000000000
   _OPRivalCount: 5
   _OPFriendCount: 6
-  friendSpawnCount: 1
-  rivalSpawnCount: 1
+  friendSpawnCount: 4
+  rivalSpawnCount: 5
 --- !u!1 &1913752730
 GameObject:
   m_ObjectHideFlags: 0
