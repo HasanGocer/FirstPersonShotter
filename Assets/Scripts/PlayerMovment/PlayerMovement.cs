@@ -18,23 +18,25 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
 
     void FixedUpdate()
     {
+        if (GameManager.Instance.gameStat == GameManager.GameStat.start)
+        {
+            // Joystick ile karakterin hareketi
+            float horizontalInput = joystick.Horizontal;
+            float verticalInput = joystick.Vertical;
 
-        // Joystick ile karakterin hareketi
-        float horizontalInput = joystick.Horizontal;
-        float verticalInput = joystick.Vertical;
+            if (horizontalInput != 0 || verticalInput != 0) isUseJoystick = true;
+            else isUseJoystick = false;
+            Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput);
+            movement.Normalize();
+            MainManager.Instance.mainPlayer.transform.TransformDirection(movement);
 
-        if (horizontalInput != 0 || verticalInput != 0) isUseJoystick = true;
-        else isUseJoystick = false;
-        Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput);
-        movement.Normalize();
-        MainManager.Instance.mainPlayer.transform.TransformDirection(movement);
+            rb.MovePosition(rb.transform.localPosition + movement * speed * Time.fixedDeltaTime);
 
-        rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
+            // Joystick ile karakterin dönüþü
+            float rotateInput = joystick.Horizontal;
 
-        // Joystick ile karakterin dönüþü
-        float rotateInput = joystick.Horizontal;
-
-        Vector3 rotation = new Vector3(0f, rotateInput, 0f);
-        rb.MoveRotation(rb.rotation * Quaternion.Euler(rotation * rotationSpeed * Time.fixedDeltaTime));
+            Vector3 rotation = new Vector3(0, rotateInput, 0);
+            rb.MoveRotation(rb.transform.localRotation * Quaternion.Euler(rotation * rotationSpeed * Time.fixedDeltaTime));
+        }
     }
 }

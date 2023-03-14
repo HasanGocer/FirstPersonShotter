@@ -22,7 +22,7 @@ public class PlayerRotation : MonoBehaviour
     void Update()
     {
         // Dokunma sayýsý kontrol edilir
-        if (Input.touchCount > 0 && !PlayerMovement.Instance.isUseJoystick)
+        if (Input.touchCount > 0 && !PlayerMovement.Instance.isUseJoystick && GameManager.Instance.gameStat == GameManager.GameStat.start)
         {
             Touch touch = Input.GetTouch(0);
 
