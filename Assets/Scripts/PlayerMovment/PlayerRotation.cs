@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerRotation : MonoBehaviour
+public class PlayerRotation : MonoSingleton<PlayerRotation>
 {
     [SerializeField] private float sensitivity = 2.0f; // Kamera hassasiyeti
     [SerializeField] private float xdistance;
@@ -12,7 +12,7 @@ public class PlayerRotation : MonoBehaviour
     private float dragDistanceThreshold = 15f; // Sürükleme hareketinin algýlanma mesafesi eþiði
     private float dragStartTime; // Sürükleme hareketinin baþlangýç zamaný
     private Vector3 initialRotation; // Kameranýn baþlangýç rotasyonu
-
+    [HideInInspector] public float xRot;
     void Start()
     {
         // Kameranýn baþlangýç rotasyonu alýnýr
@@ -40,10 +40,10 @@ public class PlayerRotation : MonoBehaviour
                     // Kamera rotasyonu hesaplanýr ve uygulanýr
                     Vector2 delta = touch.position - lastTouchPosition;
 
-                    float xRot = transform.eulerAngles.x - delta.y * sensitivity;
-                    print(xRot);
+                    xRot = transform.eulerAngles.x - delta.y * sensitivity / 5;
+                    if (xRot > 300) xRot -= 360;
                     xRot = Mathf.Clamp(xRot, -xdistance, xdistance);
-                    if (xRot < 0) xRot -= 360;
+
                     transform.eulerAngles = new Vector3(
                        xRot,
                         transform.eulerAngles.y + delta.x * sensitivity,

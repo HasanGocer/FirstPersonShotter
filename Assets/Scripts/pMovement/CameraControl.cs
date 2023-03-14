@@ -14,6 +14,7 @@ public class CameraControl : MonoBehaviour
     private float currentDistance;  // Mevcut mesafe
     private float currentHeight;  // Mevcut yükseklik
     private float currentRotationAngle;  // Mevcut yön açýsý
+    private float currentRotationAngleVertical;  // Mevcut yön açýsý
     private float currentHeightVelocity;  // Mevcut yükseklik deðiþim hýzý
     private float currentZoom;  // Mevcut zoom seviyesi
 
@@ -22,6 +23,7 @@ public class CameraControl : MonoBehaviour
         currentDistance = distance;
         currentHeight = target.position.y + height;
         currentRotationAngle = transform.eulerAngles.y;
+        currentRotationAngleVertical = transform.eulerAngles.x;
         currentZoom = Camera.main.fieldOfView;
     }
 
@@ -29,7 +31,7 @@ public class CameraControl : MonoBehaviour
     {
         // Kameranýn yönünü hedef objeye doðru döndürme
         currentRotationAngle = Mathf.LerpAngle(currentRotationAngle, target.eulerAngles.y, rotationDamping * Time.deltaTime);
-
+        currentRotationAngleVertical = PlayerRotation.Instance.xRot;
         // Kameranýn zoom seviyesini ayarlama
         currentZoom -= Input.GetAxis("Mouse ScrollWheel") * zoomSpeed;
         currentZoom = Mathf.Clamp(currentZoom, 20f, 60f);
@@ -41,7 +43,7 @@ public class CameraControl : MonoBehaviour
         currentHeight = Mathf.Lerp(currentHeight, target.position.y + height, heightDamping * Time.deltaTime);
 
         // Kameranýn pozisyonunu güncelleme
-        Vector3 cameraPosition = target.position - (Quaternion.Euler(0f, currentRotationAngle, 0f) * Vector3.forward * currentDistance);
+        Vector3 cameraPosition = target.position - (Quaternion.Euler(currentRotationAngleVertical, currentRotationAngle, 0f) * Vector3.forward * currentDistance);
         cameraPosition.y = currentHeight;
         transform.position = cameraPosition;
 
