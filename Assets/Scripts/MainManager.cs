@@ -8,6 +8,7 @@ public class MainManager : MonoSingleton<MainManager>
     public GameObject mainPlayer;
     public AnimController animController;
     public Joystick joystick;
+    public Rigidbody rb;
     public float mainHealth;
 
     public void StartGhostManager()
