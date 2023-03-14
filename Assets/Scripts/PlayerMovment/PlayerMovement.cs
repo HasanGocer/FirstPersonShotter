@@ -1,11 +1,12 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoSingleton<PlayerMovement>
 {
     Joystick joystick; // Joystick nesnesi
     public float speed = 5f; // Hareket hýzý
     public float rotationSpeed = 100f; // Dönüþ hýzý
+    [HideInInspector] public bool isUseJoystick;
     private Rigidbody rb;
     private Touch touch;
 
@@ -22,6 +23,8 @@ public class PlayerMovement : MonoBehaviour
         float horizontalInput = joystick.Horizontal;
         float verticalInput = joystick.Vertical;
 
+        if (horizontalInput != 0 || verticalInput != 0) isUseJoystick = true;
+        else isUseJoystick = false;
         Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput);
         movement.Normalize();
         MainManager.Instance.mainPlayer.transform.TransformDirection(movement);
