@@ -69,7 +69,7 @@ public class Buttons : MonoSingleton<Buttons>
         _globalPanel.SetActive(true);
         startPanel.SetActive(true);
 
-        ColorSelected.Instance.ColorSelectStart();
+        //ColorSelected.Instance.ColorSelectStart();
     }
     public IEnumerator NoThanxOnActive()
     {

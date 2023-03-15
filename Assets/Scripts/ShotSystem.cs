@@ -30,6 +30,7 @@ public class ShotSystem : MonoSingleton<ShotSystem>
     }
     private void RivalHit(Vector3 hitPos, GameObject rival)
     {
+        print(41);
         RivalID rivalID = rival.GetComponent<RivalID>();
         ItemData.Field field = ItemData.Instance.field;
 

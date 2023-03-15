@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: f3a0b672e29f5024db57cf368000fe45, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 890a11c124a46524ca301c5687970550, type: 2}
 --- !u!1001 &33673679
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1374,6 +1374,41 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1714875584777753332, guid: e2ea9127f9100f5408c842476dec2332,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2771694068856988009, guid: e2ea9127f9100f5408c842476dec2332,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4085857726858079088, guid: e2ea9127f9100f5408c842476dec2332,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 5108640494210688122, guid: e2ea9127f9100f5408c842476dec2332,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5716546930252111679, guid: e2ea9127f9100f5408c842476dec2332,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5775768282247801586, guid: e2ea9127f9100f5408c842476dec2332,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5817084773660401566, guid: e2ea9127f9100f5408c842476dec2332,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 5817084774930831198, guid: e2ea9127f9100f5408c842476dec2332,
         type: 3}
       propertyPath: m_Color.a
@@ -1394,6 +1429,11 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.0754717
       objectReference: {fileID: 0}
+    - target: {fileID: 5817084774930831199, guid: e2ea9127f9100f5408c842476dec2332,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5817084775339987523, guid: e2ea9127f9100f5408c842476dec2332,
         type: 3}
       propertyPath: m_SizeDelta.x
@@ -1413,6 +1453,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 733
+      objectReference: {fileID: 0}
+    - target: {fileID: 6399296222117355544, guid: e2ea9127f9100f5408c842476dec2332,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6399296222117355544, guid: e2ea9127f9100f5408c842476dec2332,
         type: 3}
@@ -1529,10 +1574,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: CanvasTemp 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7868896306307640310, guid: e2ea9127f9100f5408c842476dec2332,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8138778139511382279, guid: e2ea9127f9100f5408c842476dec2332,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8722066976627480185, guid: e2ea9127f9100f5408c842476dec2332,
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9003219028633389664, guid: e2ea9127f9100f5408c842476dec2332,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2ea9127f9100f5408c842476dec2332, type: 3}
@@ -1942,7 +2002,7 @@ MonoBehaviour:
   finishGameMoneyText: {fileID: 1853874972}
   _loadingPanel: {fileID: 658473722}
   _loadingScreenCountdownTime: 2
-  _startSceneCount: 1
+  _startSceneCount: 0
 --- !u!114 &847967142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3618,6 +3678,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78bb0a7ee647c0548a003c78cad38e5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _characterBar: {fileID: 0}
   _skins:
   - {fileID: 126270915}
   - {fileID: 33673681}
@@ -3629,9 +3690,12 @@ MonoBehaviour:
   - {fileID: 2089121197}
   - {fileID: 1566811246}
   - {fileID: 893179674}
-  _guns: []
-  skinCount: 0
+  guns: []
+  runPos: []
+  idlePos: []
   gunCount: 0
+  skinCount: 0
+  colorCount: 0
 --- !u!136 &1913752736
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3672,8 +3736,7 @@ MonoBehaviour:
   - {fileID: 893179676}
   walk: {fileID: -203655887218126122, guid: 99eee6b53b9341c40b43eb9f3269ccb2, type: 3}
   death: {fileID: -203655887218126122, guid: d880c34e7d97a3c4db681000e5490972, type: 3}
-  "\u0131dle": {fileID: -203655887218126122, guid: ea8f128b20fd25a4091af82f709aff0a,
-    type: 3}
+  idle: {fileID: 0}
 --- !u!114 &1913752738
 MonoBehaviour:
   m_ObjectHideFlags: 0

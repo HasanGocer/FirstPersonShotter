@@ -7,7 +7,8 @@ public class ColorSelected : MonoSingleton<ColorSelected>
 {
     public int friendColorCount, rivalColorCount;
     public int friendSkinCount, rivalSkinCount;
-    [SerializeField] private int _maxColorCount, _maxSkinCount;
+    public int friendGunCount, rivalGunCount;
+    [SerializeField] private int _maxColorCount, _maxSkinCount, _maxGunCount;
     [SerializeField] private List<Button> _colorButton = new List<Button>();
 
     public void ColorSelectStart()
@@ -19,6 +20,10 @@ public class ColorSelected : MonoSingleton<ColorSelected>
 
         if (PlayerPrefs.HasKey("friendSkinCount")) friendSkinCount = PlayerPrefs.GetInt("friendSkinCount");
         else PlayerPrefs.SetInt("friendSkinCount", friendSkinCount);
+
+
+        if (PlayerPrefs.HasKey("friendGunCount")) friendGunCount = PlayerPrefs.GetInt("friendGunCount");
+        else PlayerPrefs.SetInt("friendGunCount", friendGunCount);
     }
 
     public void SelectColor(int colorCount)
@@ -27,5 +32,6 @@ public class ColorSelected : MonoSingleton<ColorSelected>
 
         while (friendColorCount == (rivalColorCount = Random.Range(0, _maxColorCount))) ;
         while (friendSkinCount == (rivalSkinCount = Random.Range(0, _maxSkinCount))) ;
+        while (friendGunCount == (rivalGunCount = Random.Range(0, _maxGunCount))) ;
     }
 }
