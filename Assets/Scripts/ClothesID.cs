@@ -13,7 +13,7 @@ public class ClothesID : MonoBehaviour
     public int gunCount, skinCount, colorCount;
 
 
-    public void StartClothesPlacement()
+    public GameObject StartClothesPlacement()
     {
         if (_characterBar.characterStat == CharacterBar.CharacterStat.friend)
         {
@@ -35,5 +35,6 @@ public class ClothesID : MonoBehaviour
         guns[gunCount].SetActive(true);
         guns[gunCount].transform.SetParent(runPos[skinCount].transform.parent);
         guns[gunCount].transform.GetChild(0).GetComponent<MeshRenderer>().materials[1] = ColorSelected.Instance.playerMaterials[colorCount];
+        return guns[gunCount];
     }
 }

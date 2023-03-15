@@ -555,6 +555,7 @@ MonoBehaviour:
   characterBar: {fileID: 1299147501045456407}
   clothesID: {fileID: 929468296608419887}
   eyePosition: {fileID: 1829631956599913095}
+  gunFirePos: {fileID: 0}
   isLive: 1
   isSeen: 0
 --- !u!136 &7237629523688781453
@@ -625,6 +626,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78bb0a7ee647c0548a003c78cad38e5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _characterBar: {fileID: 0}
   _skins:
   - {fileID: 1406185909829208899}
   - {fileID: 8171470321355774130}
@@ -662,8 +664,9 @@ MonoBehaviour:
   - {fileID: 9049296972318046159}
   - {fileID: 7009649557416935095}
   - {fileID: 6179243218555321646}
-  skinCount: 0
   gunCount: 0
+  skinCount: 0
+  colorCount: 0
 --- !u!195 &4425450118054600373
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -866,7 +869,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &9114670901013038684
 Transform:
   m_ObjectHideFlags: 0

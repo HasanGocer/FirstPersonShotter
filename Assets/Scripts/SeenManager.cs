@@ -126,7 +126,7 @@ public class SeenManager : MonoSingleton<SeenManager>
         rivalID.isSeen = true;
         navMeshAgent.isStopped = true;
 
-        ParticalSystem.Instance.ShotGunPartical(rivalID.gunFirePos.transform.position, friend);
+        ParticalSystem.Instance.ShotGunPartical(rivalID.gunFirePos.transform.position + new Vector3(0, 0, 0.8f), friend);
         StartCoroutine(RivalHit(hit.point, friend, rivalID));
 
         if (!friendID.isSeen)
@@ -145,7 +145,7 @@ public class SeenManager : MonoSingleton<SeenManager>
         friendID.isSeen = true;
         navMeshAgent.isStopped = true;
 
-        ParticalSystem.Instance.ShotGunPartical(friendID.gunFirePos.transform.position, rival);
+        ParticalSystem.Instance.ShotGunPartical(friendID.gunFirePos.transform.position + new Vector3(0, 0, 0.8f), rival);
         StartCoroutine(FriendHit(hit.point, hit.collider.gameObject, friendID));
 
         if (!rivalID.isSeen)

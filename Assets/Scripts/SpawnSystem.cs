@@ -69,7 +69,8 @@ public class SpawnSystem : MonoSingleton<SpawnSystem>
         RivalID rivalID = rival.GetComponent<RivalID>();
 
         rivalID.RivalIDStart();
-        rivalID.clothesID.StartClothesPlacement();
+        GameObject gun = rivalID.clothesID.StartClothesPlacement();
+        rivalID.gunFirePos = gun;
         StartCoroutine(SeenManager.Instance.RivalSeenMechanic(rival, rivalID, rivalID.eyePosition));
         StartCoroutine(MoverSystem.Instance.RivalNPCMove(rival, rivalID));
     }

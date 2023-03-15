@@ -37,6 +37,6 @@ public class ShotSystem : MonoSingleton<ShotSystem>
         rivalID.characterBar.BarUpdate(field.rivalHealth, rivalID.rivalHealth, field.mainDamage);
         rivalID.rivalHealth -= ItemData.Instance.field.mainDamage;
         ParticalSystem.Instance.BodyShotPartical(hitPos);
-        ParticalSystem.Instance.ShotGunPartical(hitPos, rival);
+        ParticalSystem.Instance.ShotGunPartical(hitPos + new Vector3(0, 0, 0.8f), rival);
     }
 }
