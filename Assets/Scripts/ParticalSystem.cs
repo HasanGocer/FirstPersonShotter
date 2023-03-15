@@ -6,29 +6,21 @@ public class ParticalSystem : MonoSingleton<ParticalSystem>
 {
     [SerializeField] int _OPWallShotParticalCount;
     [SerializeField] int _OPBodyShotParticalCount;
+    [SerializeField] int _OPShotGunParticalCount;
 
-    [SerializeField] float _WallShotTime;
-    [SerializeField] float _bodyShotTime;
 
     public void WallShotPartical(Vector3 pos)
     {
-        StartCoroutine(WallShotParticalEnum(pos));
+        ObjectPool.Instance.GetPooledObjectAdd(_OPWallShotParticalCount, pos);
     }
     public void BodyShotPartical(Vector3 pos)
     {
-        StartCoroutine(BodyShotParticalEnum(pos));
+        ObjectPool.Instance.GetPooledObjectAdd(_OPBodyShotParticalCount, pos);
+    }
+    public void ShotGunPartical(Vector3 pos, GameObject target)
+    {
+        GameObject partical = ObjectPool.Instance.GetPooledObjectAdd(_OPShotGunParticalCount, pos);
+        partical.transform.LookAt(target.transform);
     }
 
-    private IEnumerator WallShotParticalEnum(Vector3 pos)
-    {
-        GameObject partical = ObjectPool.Instance.GetPooledObject(_OPWallShotParticalCount, pos);
-        yield return new WaitForSeconds(_WallShotTime);
-        ObjectPool.Instance.AddObject(_OPWallShotParticalCount, partical);
-    }
-    private IEnumerator BodyShotParticalEnum(Vector3 pos)
-    {
-        GameObject partical = ObjectPool.Instance.GetPooledObject(_OPBodyShotParticalCount, pos);
-        yield return new WaitForSeconds(_bodyShotTime);
-        ObjectPool.Instance.AddObject(_OPBodyShotParticalCount, partical);
-    }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class CoinSpawn : MonoSingleton<CoinSpawn>
 {
@@ -27,29 +28,15 @@ public class CoinSpawn : MonoSingleton<CoinSpawn>
             rb.velocity = new Vector3(Random.Range(-3, 3), 0, Random.Range(-3, 3));
             rb.useGravity = true;
             coins.Add(obj);
-            yield return new WaitForSeconds(0.1f);
         }
 
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
 
         for (int i = 0; i < coinCount; i++)
-            StartCoroutine(Walk(coins[i], Finish));
+            Walk(coins[i], Finish);
     }
-    private IEnumerator Walk(GameObject obj, GameObject Finish)
+    private void Walk(GameObject obj, GameObject finish)
     {
-        float lerpCount = 0;
-
-        obj.GetComponent<Rigidbody>().useGravity = false;
-        while (true)
-        {
-            lerpCount += Time.deltaTime;
-            obj.transform.position = Vector3.Lerp(obj.transform.position, Finish.transform.position + new Vector3(0, 4, 0), lerpCount);
-            yield return new WaitForSeconds(Time.deltaTime);
-            if (2 > Vector3.Distance(obj.transform.position, Finish.transform.position + new Vector3(0, 4, 0)))
-            {
-                ObjectPool.Instance.AddObject(_OPCoinCount, obj);
-                break;
-            }
-        }
+        obj.transform.DOMove(finish.transform.position, 0.3f);
     }
 }

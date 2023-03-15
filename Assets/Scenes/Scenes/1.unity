@@ -1864,6 +1864,7 @@ MonoBehaviour:
   joystick: {fileID: 1506872443}
   rb: {fileID: 1913752734}
   mainHealth: 0
+  rivalDownAddedMoney: 0
 --- !u!114 &782121450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2401,6 +2402,10 @@ MonoBehaviour:
       type: 3}
     objectParent: {fileID: 0}
     poolSize: 10
+  - objectPrefab: {fileID: 1174029534445386, guid: 1d637701e2c3c514ca904aaddb4cc7f8,
+      type: 3}
+    objectParent: {fileID: 0}
+    poolSize: 300
 --- !u!114 &896000842
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2493,8 +2498,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _OPWallShotParticalCount: 3
   _OPBodyShotParticalCount: 4
-  _WallShotTime: 1
-  _bodyShotTime: 1
+  _OPShotGunParticalCount: 7
 --- !u!114 &896000846
 MonoBehaviour:
   m_ObjectHideFlags: 0

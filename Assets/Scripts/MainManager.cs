@@ -10,6 +10,7 @@ public class MainManager : MonoSingleton<MainManager>
     public Joystick joystick;
     public Rigidbody rb;
     public float mainHealth;
+    public float rivalDownAddedMoney;
 
     public void StartGhostManager()
     {

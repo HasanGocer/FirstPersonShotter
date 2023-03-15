@@ -10,6 +10,7 @@ public class ColorSelected : MonoSingleton<ColorSelected>
     public int friendGunCount, rivalGunCount;
     [SerializeField] private int _maxColorCount, _maxSkinCount, _maxGunCount;
     [SerializeField] private List<Button> _colorButton = new List<Button>();
+    public List<Material> playerMaterials = new List<Material>();
 
     public void ColorSelectStart()
     {

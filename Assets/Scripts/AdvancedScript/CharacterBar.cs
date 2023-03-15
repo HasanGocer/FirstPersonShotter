@@ -53,6 +53,7 @@ public class CharacterBar : MonoBehaviour
     {
         if (gameObject.GetComponent<RivalID>().isLive)
         {
+            MainManager mainManager = MainManager.Instance;
             RivalID rivalID = gameObject.GetComponent<RivalID>();
             NavMeshAgent navMeshAgent = gameObject.GetComponent<NavMeshAgent>();
 
@@ -62,6 +63,8 @@ public class CharacterBar : MonoBehaviour
             rivalID.capsuleCollider.enabled = false;
             _barPanel.SetActive(false);
 
+            GameManager.Instance.addedMoney += (int)mainManager.rivalDownAddedMoney;
+            CoinSpawn.Instance.Spawn(gameObject, mainManager.mainPlayer);
             FinishSystem.Instance.RivalDown();
         }
     }

@@ -263,7 +263,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3168538809905955171
 Transform:
   m_ObjectHideFlags: 0
@@ -341,6 +341,7 @@ MonoBehaviour:
   characterBar: {fileID: 3168538810157959613}
   clothesID: {fileID: 3168538810157959601}
   eyePosition: {fileID: 3168538810419271051}
+  gunFirePos: {fileID: 0}
   isLive: 1
   isSeen: 0
 --- !u!136 &3168538810157959603
@@ -411,6 +412,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78bb0a7ee647c0548a003c78cad38e5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _characterBar: {fileID: 0}
   _skins:
   - {fileID: 7738031808420031907}
   - {fileID: 2796650007121501859}
@@ -448,8 +450,9 @@ MonoBehaviour:
   - {fileID: 4395860443031882171}
   - {fileID: 1392513223969519562}
   - {fileID: 5112016681705797485}
-  skinCount: 0
   gunCount: 0
+  skinCount: 0
+  colorCount: 0
 --- !u!195 &3520499014203902416
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1728,7 +1731,7 @@ PrefabInstance:
     - target: {fileID: 4655573765166896748, guid: 87fd6e8d8309b094da7ce545873e548b,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5758067484941753878, guid: 87fd6e8d8309b094da7ce545873e548b,
         type: 3}

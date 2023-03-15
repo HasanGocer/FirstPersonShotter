@@ -10,6 +10,7 @@ public class FriendID : MonoBehaviour
     public CharacterBar characterBar;
     public ClothesID clothesID;
     public GameObject eyePosition;
+    public GameObject gunFirePos;
     public bool isLive = true;
     public bool isSeen;
 
