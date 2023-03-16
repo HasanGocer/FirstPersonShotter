@@ -8,6 +8,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     public enum GameStat
     {
+        UIStart=-1,
         intro = 0,
         start = 1,
         wait = 2,

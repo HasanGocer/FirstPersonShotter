@@ -81,8 +81,10 @@ public class ItemData : MonoSingleton<ItemData>
             fieldPrice.objectCount = fieldPrice.objectCount * factor.objectCount;
         }
         */
-
-        StartCoroutine(Buttons.Instance.LoadingScreen());
+        if (GameManager.Instance.gameStat == GameManager.GameStat.intro)
+            StartCoroutine(Buttons.Instance.LoadingScreen());
+        else if (GameManager.Instance.gameStat == GameManager.GameStat.UIStart)
+            ColorSelected.Instance.ColorSelectStart();
     }
 
     public void SetMainHealth()

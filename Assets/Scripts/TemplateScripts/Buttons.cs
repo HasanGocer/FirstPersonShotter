@@ -51,6 +51,11 @@ public class Buttons : MonoSingleton<Buttons>
     [SerializeField] int _loadingScreenCountdownTime;
     [SerializeField] int _startSceneCount;
 
+    [Header("Start_UI_Panel")]
+    [Space(10)]
+
+    [SerializeField] Button _UIStartBackButton;
+
     private void Start()
     {
         ButtonPlacement();
@@ -69,7 +74,7 @@ public class Buttons : MonoSingleton<Buttons>
         _globalPanel.SetActive(true);
         startPanel.SetActive(true);
 
-        //ColorSelected.Instance.ColorSelectStart();
+        StartCoroutine(StartButton());
     }
     public IEnumerator NoThanxOnActive()
     {
@@ -115,9 +120,18 @@ public class Buttons : MonoSingleton<Buttons>
         _winPrizeButton.onClick.AddListener(() => StartCoroutine(WinPrizeButton()));
         _winEmptyButton.onClick.AddListener(() => StartCoroutine(WinButton()));
         _failButton.onClick.AddListener(() => StartCoroutine(FailButton()));
-        _startButton.onClick.AddListener(() => StartCoroutine(StartButton()));
+        _startButton.onClick.AddListener(StartUIButton);
+        if (GameManager.Instance.gameStat == GameManager.GameStat.UIStart)
+            _UIStartBackButton.onClick.AddListener(StartUIBackButton);
     }
-
+    private void StartUIButton()
+    {
+        ColorSelected.Instance.colorPanel.SetActive(true);
+    }
+    private void StartUIBackButton()
+    {
+        ColorSelected.Instance.colorPanel.SetActive(false);
+    }
     private IEnumerator StartButton()
     {
         GameManager.Instance.gameStat = GameManager.GameStat.start;

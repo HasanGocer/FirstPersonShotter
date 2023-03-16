@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ColorSelected : MonoSingleton<ColorSelected>
 {
@@ -11,6 +12,9 @@ public class ColorSelected : MonoSingleton<ColorSelected>
     [SerializeField] private int _maxColorCount, _maxSkinCount, _maxGunCount;
     [SerializeField] private List<Button> _colorButton = new List<Button>();
     public List<Material> playerMaterials = new List<Material>();
+    public GameObject colorPanel;
+    [SerializeField] int _StartUISceneCount;
+    [SerializeField] int _StartUISceneMaxCount;
 
     public void ColorSelectStart()
     {
@@ -30,9 +34,9 @@ public class ColorSelected : MonoSingleton<ColorSelected>
     public void SelectColor(int colorCount)
     {
         friendColorCount = colorCount;
-
         while (friendColorCount == (rivalColorCount = Random.Range(0, _maxColorCount))) ;
         while (friendSkinCount == (rivalSkinCount = Random.Range(0, _maxSkinCount))) ;
         while (friendGunCount == (rivalGunCount = Random.Range(0, _maxGunCount))) ;
+        SceneManager.LoadScene(_StartUISceneCount + Random.Range(0, _StartUISceneMaxCount));
     }
 }
