@@ -384,7 +384,7 @@ MonoBehaviour:
   - {fileID: 3168538810615785394}
   walk: {fileID: -203655887218126122, guid: 99eee6b53b9341c40b43eb9f3269ccb2, type: 3}
   death: {fileID: -203655887218126122, guid: d880c34e7d97a3c4db681000e5490972, type: 3}
-  idle: {fileID: 0}
+  idle: {fileID: -203655887218126122, guid: ea8f128b20fd25a4091af82f709aff0a, type: 3}
 --- !u!114 &3168538810157959613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -412,7 +412,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78bb0a7ee647c0548a003c78cad38e5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _characterBar: {fileID: 0}
+  _characterBar: {fileID: 3168538810157959613}
   _skins:
   - {fileID: 7738031808420031907}
   - {fileID: 2796650007121501859}

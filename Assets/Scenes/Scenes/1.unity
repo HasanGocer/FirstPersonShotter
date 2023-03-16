@@ -2001,9 +2001,10 @@ MonoBehaviour:
   _failButton: {fileID: 1853874973}
   finishWaitTime: 1
   finishGameMoneyText: {fileID: 1853874972}
-  _loadingPanel: {fileID: 658473722}
+  loadingPanel: {fileID: 658473722}
   _loadingScreenCountdownTime: 2
   _startSceneCount: 0
+  _UIStartBackButton: {fileID: 0}
 --- !u!114 &847967142
 MonoBehaviour:
   m_ObjectHideFlags: 0

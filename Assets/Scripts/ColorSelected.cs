@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class ColorSelected : MonoSingleton<ColorSelected>
+public class ColorSelected : LoadSingleton<ColorSelected>
 {
     public int friendColorCount, rivalColorCount;
     public int friendSkinCount, rivalSkinCount;
@@ -37,6 +37,10 @@ public class ColorSelected : MonoSingleton<ColorSelected>
         while (friendColorCount == (rivalColorCount = Random.Range(0, _maxColorCount))) ;
         while (friendSkinCount == (rivalSkinCount = Random.Range(0, _maxSkinCount))) ;
         while (friendGunCount == (rivalGunCount = Random.Range(0, _maxGunCount))) ;
+
+        colorPanel.SetActive(false);
+        Buttons.Instance.loadingPanel.SetActive(true);
+
         SceneManager.LoadScene(_StartUISceneCount + Random.Range(0, _StartUISceneMaxCount));
     }
 }

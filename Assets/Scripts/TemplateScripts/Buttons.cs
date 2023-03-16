@@ -47,7 +47,7 @@ public class Buttons : MonoSingleton<Buttons>
     [Header("Loading_Panel")]
     [Space(10)]
 
-    [SerializeField] GameObject _loadingPanel;
+    public GameObject loadingPanel;
     [SerializeField] int _loadingScreenCountdownTime;
     [SerializeField] int _startSceneCount;
 
@@ -66,11 +66,11 @@ public class Buttons : MonoSingleton<Buttons>
     public IEnumerator LoadingScreen()
     {
 
-        _loadingPanel.SetActive(true);
+        loadingPanel.SetActive(true);
         _globalPanel.SetActive(false);
         startPanel.SetActive(false);
         yield return new WaitForSeconds(_loadingScreenCountdownTime);
-        _loadingPanel.SetActive(false);
+        loadingPanel.SetActive(false);
         _globalPanel.SetActive(true);
         startPanel.SetActive(true);
 

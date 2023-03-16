@@ -189,7 +189,7 @@ MonoBehaviour:
   _failButton: {fileID: 1590497040}
   finishWaitTime: 0
   finishGameMoneyText: {fileID: 0}
-  _loadingPanel: {fileID: 0}
+  loadingPanel: {fileID: 666836443}
   _loadingScreenCountdownTime: 0
   _startSceneCount: 0
   _UIStartBackButton: {fileID: 1303418383}
@@ -939,6 +939,12 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 268273393696413518, guid: c918a09e3b59ec847894f3c45ff2981d,
     type: 3}
   m_PrefabInstance: {fileID: 537654627}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &666836443 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8994839689625391767, guid: e2ea9127f9100f5408c842476dec2332,
+    type: 3}
+  m_PrefabInstance: {fileID: 1707679416}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &716940510
 GameObject:

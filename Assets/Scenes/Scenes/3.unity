@@ -1414,6 +1414,7 @@ MonoBehaviour:
   joystick: {fileID: 1506872443}
   rb: {fileID: 1913752734}
   mainHealth: 0
+  rivalDownAddedMoney: 0
 --- !u!114 &782121450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1550,9 +1551,10 @@ MonoBehaviour:
   _failButton: {fileID: 1853874973}
   finishWaitTime: 1
   finishGameMoneyText: {fileID: 1853874972}
-  _loadingPanel: {fileID: 658473722}
+  loadingPanel: {fileID: 658473722}
   _loadingScreenCountdownTime: 2
   _startSceneCount: 1
+  _UIStartBackButton: {fileID: 0}
 --- !u!114 &847967142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2043,8 +2045,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _OPWallShotParticalCount: 3
   _OPBodyShotParticalCount: 4
-  _WallShotTime: 1
-  _bodyShotTime: 1
+  _OPShotGunParticalCount: 0
 --- !u!114 &896000846
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -48,7 +48,8 @@ public class SpawnSystem : MonoSingleton<SpawnSystem>
         FriendID friendID = friend.GetComponent<FriendID>();
 
         friendID.FriendHealthStart();
-        friendID.clothesID.StartClothesPlacement();
+        GameObject gun = friendID.clothesID.StartClothesPlacement();
+        friendID.gunFirePos = gun;
         StartCoroutine(SeenManager.Instance.FriendSeenMechanic(friend, friendID, friendID.eyePosition));
         StartCoroutine(MoverSystem.Instance.FriendNPCMove(friend, friendID));
     }

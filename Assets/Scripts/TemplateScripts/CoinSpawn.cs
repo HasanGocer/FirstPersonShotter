@@ -28,15 +28,22 @@ public class CoinSpawn : MonoSingleton<CoinSpawn>
             rb.velocity = new Vector3(Random.Range(-3, 3), 0, Random.Range(-3, 3));
             rb.useGravity = true;
             coins.Add(obj);
+            yield return null;
         }
 
         yield return new WaitForSeconds(2);
 
         for (int i = 0; i < coinCount; i++)
-            Walk(coins[i], Finish);
+        {
+            StartCoroutine(Walk(coins[i], Finish));
+            yield return null;
+        }
     }
-    private void Walk(GameObject obj, GameObject finish)
+    private IEnumerator Walk(GameObject obj, GameObject finish)
     {
         obj.transform.DOMove(finish.transform.position, 0.3f);
+        yield return new WaitForSeconds(0.3f);
+        ObjectPool.Instance.AddObject(_OPCoinCount, obj);
+
     }
 }
