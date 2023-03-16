@@ -32,7 +32,7 @@ public class ClothesID : MonoBehaviour
         _skins[skinCount].SetActive(true);
         guns[gunCount].SetActive(true);
         guns[gunCount].transform.SetParent(runPos[skinCount].transform.parent);
-        _skins[skinCount].transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().materials[1] = ColorSelected.Instance.playerMaterials[colorCount];
+        _skins[skinCount].transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().materials[0] = ColorSelected.Instance.playerMaterials[colorCount];
         return guns[gunCount];
     }
 }

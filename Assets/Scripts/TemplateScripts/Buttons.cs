@@ -196,9 +196,8 @@ public class Buttons : MonoSingleton<Buttons>
     {
         if (GameManager.Instance.gameStat != GameManager.GameStat.finish)
         {
-            if (MarketSystem.Instance.isOpen)
-                MarketSystem.Instance.MarketPanelOff();
-            startPanel.SetActive(false);
+            if (GameManager.Instance.gameStat == GameManager.GameStat.UIStart)
+                startPanel.SetActive(false);
             _settingGame.SetActive(true);
             _settingButton.gameObject.SetActive(false);
             _globalPanel.SetActive(false);
@@ -206,7 +205,7 @@ public class Buttons : MonoSingleton<Buttons>
     }
     private void SettingBackButton()
     {
-        if (GameManager.Instance.gameStat == GameManager.GameStat.intro)
+        if (GameManager.Instance.gameStat == GameManager.GameStat.UIStart)
             startPanel.SetActive(true);
         _settingGame.SetActive(false);
         _settingButton.gameObject.SetActive(true);
