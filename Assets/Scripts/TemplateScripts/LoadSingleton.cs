@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class LoadSingleton<T> : MonoBehaviour where T : LoadSingleton<T>
 {
-    private static T instance;
+    private static volatile T instance;
     private static object lockObject = new object(); // Thread-safe bir kod yazmak için kilit nesnesi
 
     public static T Instance
@@ -50,7 +50,6 @@ public abstract class LoadSingleton<T> : MonoBehaviour where T : LoadSingleton<T
         if (instance == null)
         {
             instance = this as T;
-            DontDestroyOnLoad(gameObject);
         }
         // Eðer instance bu MonoBehavior nesnesi deðilse, bu nesne yok edilir.
         else if (instance != this)

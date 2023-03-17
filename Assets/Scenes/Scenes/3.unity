@@ -604,6 +604,48 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &564243893 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2279028457351286171, guid: e2ea9127f9100f5408c842476dec2332,
+    type: 3}
+  m_PrefabInstance: {fileID: 679440802}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &564243894 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3880749290033636884, guid: e2ea9127f9100f5408c842476dec2332,
+    type: 3}
+  m_PrefabInstance: {fileID: 679440802}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &564243895 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8633278198951435849, guid: e2ea9127f9100f5408c842476dec2332,
+    type: 3}
+  m_PrefabInstance: {fileID: 679440802}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &564243896 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 498179598052019535, guid: e2ea9127f9100f5408c842476dec2332,
+    type: 3}
+  m_PrefabInstance: {fileID: 679440802}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &658473722 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8994839689625391767, guid: e2ea9127f9100f5408c842476dec2332,
@@ -1186,6 +1228,11 @@ MonoBehaviour:
   _loadingScreenCountdownTime: 2
   _startSceneCount: 1
   _UIStartBackButton: {fileID: 0}
+  ContinuePanel: {fileID: 564243896}
+  rivalText: {fileID: 564243895}
+  friendText: {fileID: 564243894}
+  _continueButton: {fileID: 564243893}
+  _continueWaitTime: 1
 --- !u!114 &847967142
 MonoBehaviour:
   m_ObjectHideFlags: 0

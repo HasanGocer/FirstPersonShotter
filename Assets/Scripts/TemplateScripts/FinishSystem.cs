@@ -13,29 +13,12 @@ public class FinishSystem : MonoSingleton<FinishSystem>
     public void FriendDown()
     {
         friendCount--;
-        if (friendCount <= 0)
-        {
-            //lose
-        }
+        if (friendCount <= 0) GameStat.Instance.GameSave(GameStat.WinStat.rival);
     }
 
     public void RivalDown()
     {
         rivalCount--;
-        if (rivalCount <= 0 && GameManager.Instance.gameStat == GameManager.GameStat.start) FinishTime();
-    }
-
-    private void FinishTime()
-    {
-        GameManager gameManager = GameManager.Instance;
-        Buttons buttons = Buttons.Instance;
-        MoneySystem moneySystem = MoneySystem.Instance;
-        gameManager.gameStat = GameManager.GameStat.finish;
-        StartCoroutine(BarSystem.Instance.BarImageFillAmountIenum());
-        LevelManager.Instance.LevelCheck();
-        buttons.winPanel.SetActive(true);
-        buttons.barPanel.SetActive(true);
-        buttons.finishGameMoneyText.text = moneySystem.NumberTextRevork(gameManager.addedMoney);
-        moneySystem.MoneyTextRevork(gameManager.addedMoney);
+        if (rivalCount <= 0 && GameManager.Instance.gameStat == GameManager.GameStat.start) GameStat.Instance.GameSave(GameStat.WinStat.friend);
     }
 }

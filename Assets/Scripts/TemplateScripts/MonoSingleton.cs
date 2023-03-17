@@ -11,9 +11,7 @@ public class MonoSingleton<T> : MonoBehaviour where T : MonoSingleton<T>
         get
         {
             if (instance == null)
-            {
                 instance = FindObjectOfType(typeof(T)) as T;
-            }
 
             return instance;
         }

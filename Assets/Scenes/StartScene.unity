@@ -194,6 +194,11 @@ MonoBehaviour:
   _loadingScreenCountdownTime: 0
   _startSceneCount: 0
   _UIStartBackButton: {fileID: 1799480427}
+  ContinuePanel: {fileID: 0}
+  rivalText: {fileID: 0}
+  friendText: {fileID: 0}
+  _continueButton: {fileID: 0}
+  _continueWaitTime: 0
 --- !u!114 &73993542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -252,7 +257,6 @@ GameObject:
   - component: {fileID: 195301239}
   - component: {fileID: 195301241}
   - component: {fileID: 195301240}
-  - component: {fileID: 195301242}
   - component: {fileID: 195301243}
   m_Layer: 0
   m_Name: GameManager
@@ -322,60 +326,6 @@ MonoBehaviour:
   mainMusic: {fileID: 0}
   bloomEffect: {fileID: 0}
   goldEffect: {fileID: 0}
---- !u!114 &195301242
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 195301237}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ac74eb9c41037a44ae3b364ba415648, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  field:
-    mainHealth: 0
-    rivalHealth: 0
-    friendHealth: 0
-    mainDamage: 0
-    rivalDamage: 0
-  standart:
-    mainHealth: 0
-    rivalHealth: 0
-    friendHealth: 0
-    mainDamage: 0
-    rivalDamage: 0
-  factor:
-    mainHealth: 0
-    rivalHealth: 0
-    friendHealth: 0
-    mainDamage: 0
-    rivalDamage: 0
-  constant:
-    mainHealth: 0
-    rivalHealth: 0
-    friendHealth: 0
-    mainDamage: 0
-    rivalDamage: 0
-  maxFactor:
-    mainHealth: 0
-    rivalHealth: 0
-    friendHealth: 0
-    mainDamage: 0
-    rivalDamage: 0
-  max:
-    mainHealth: 0
-    rivalHealth: 0
-    friendHealth: 0
-    mainDamage: 0
-    rivalDamage: 0
-  fieldPrice:
-    mainHealth: 0
-    rivalHealth: 0
-    friendHealth: 0
-    mainDamage: 0
-    rivalDamage: 0
 --- !u!114 &195301243
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -569,13 +519,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 490499057}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1000378689}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &490499059
 MonoBehaviour:
@@ -885,6 +835,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1209821445}
   - {fileID: 490499058}
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -901,6 +852,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1209821444
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1209821445}
+  - component: {fileID: 1209821446}
+  m_Layer: 0
+  m_Name: StatManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1209821445
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1209821444}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1000378689}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1209821446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1209821444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23818bc987771ea42b80c001101cd7cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _friendWinCount: 0
+  _rivalWinCount: 0
+  _WinCount: 3
+  mapCount: 0
+  addedMoney: 0
 --- !u!1 &1275264120 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4100083986392741121, guid: e2ea9127f9100f5408c842476dec2332,

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class ColorSelected : LoadSingleton<ColorSelected>
+public class ColorSelected : MonoSingleton<ColorSelected>
 {
     public int friendColorCount, rivalColorCount;
     public int friendSkinCount, rivalSkinCount;

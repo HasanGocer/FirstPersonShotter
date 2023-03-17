@@ -56,6 +56,14 @@ public class Buttons : MonoSingleton<Buttons>
 
     [SerializeField] Button _UIStartBackButton;
 
+    [Header("Continue_Panel")]
+    [Space(10)]
+
+    public GameObject ContinuePanel;
+    public TMP_Text rivalText, friendText;
+    [SerializeField] private Button _continueButton;
+    [SerializeField] int _continueWaitTime;
+
     private void Start()
     {
         ButtonPlacement();
@@ -122,7 +130,11 @@ public class Buttons : MonoSingleton<Buttons>
         _failButton.onClick.AddListener(() => StartCoroutine(FailButton()));
         _startButton.onClick.AddListener(StartUIButton);
         if (GameManager.Instance.gameStat == GameManager.GameStat.UIStart)
+        {
             _UIStartBackButton.onClick.AddListener(StartUIBackButton);
+        }
+        else
+            _continueButton.onClick.AddListener(() => StartCoroutine(ContinueButton()));
     }
     private void StartUIButton()
     {
@@ -157,6 +169,17 @@ public class Buttons : MonoSingleton<Buttons>
         ShotSystem.Instance.ShotSystemStart();
         //MarketSystem.Instance.GameStart();
     }
+    private IEnumerator ContinueButton()
+    {
+        GameManager gameManager = GameManager.Instance;
+
+        _continueButton.enabled = false;
+
+        yield return new WaitForSeconds(_continueWaitTime);
+
+        gameManager.SetLevel();
+        SceneManager.LoadScene(_startSceneCount);
+    }
     private IEnumerator WinButton()
     {
         GameManager gameManager = GameManager.Instance;
@@ -165,9 +188,8 @@ public class Buttons : MonoSingleton<Buttons>
         gameManager.SetLevel();
         BarSystem.Instance.BarStopButton(0);
         MoneySystem.Instance.MoneyTextRevork(gameManager.addedMoney);
-        yield return new WaitForSeconds(finishWaitTime);
 
-        gameManager.SetLevel();
+        yield return new WaitForSeconds(finishWaitTime);
 
         SceneManager.LoadScene(_startSceneCount);
     }
@@ -177,8 +199,8 @@ public class Buttons : MonoSingleton<Buttons>
 
         _winPrizeButton.enabled = false;
         BarSystem.Instance.BarStopButton(gameManager.addedMoney);
-        yield return new WaitForSeconds(finishWaitTime);
 
+        yield return new WaitForSeconds(finishWaitTime);
 
         gameManager.SetLevel();
 
@@ -188,7 +210,6 @@ public class Buttons : MonoSingleton<Buttons>
     {
         MoneySystem.Instance.MoneyTextRevork(GameManager.Instance.addedMoney);
         yield return new WaitForSeconds(finishWaitTime);
-
 
         SceneManager.LoadScene(_startSceneCount);
     }
