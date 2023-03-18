@@ -18,6 +18,11 @@ public class CharacterBar : MonoBehaviour
     [SerializeField] private Image _bar;
     [SerializeField] private GameObject _barPanel;
 
+    public void MainCharacterStart()
+    {
+        _barPanel.SetActive(true);
+    }
+
     public void BarUpdate(float max, float count, float down)
     {
         float nowBar = count / max;

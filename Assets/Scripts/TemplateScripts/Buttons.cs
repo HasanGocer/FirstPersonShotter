@@ -164,6 +164,8 @@ public class Buttons : MonoSingleton<Buttons>
         yield return new WaitForSeconds(1);
         _CountdownPanel.SetActive(false);
 
+        MainManager.Instance.characterBar.MainCharacterStart();
+        MainManager.Instance.clothesID.MainStart();
         MainManager.Instance.joystick.gameObject.SetActive(true);
         SpawnSystem.Instance.SpawnTime();
         ShotSystem.Instance.ShotSystemStart();

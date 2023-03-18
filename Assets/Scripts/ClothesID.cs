@@ -35,4 +35,9 @@ public class ClothesID : MonoBehaviour
         _skins[skinCount].transform.GetChild(0).GetComponent<SkinnedMeshRenderer>().materials[0] = ColorSelected.Instance.playerMaterials[colorCount];
         return guns[gunCount];
     }
+
+    public void MainStart()
+    {
+        guns[ColorSelected.Instance.friendGunCount].SetActive(true);
+    }
 }

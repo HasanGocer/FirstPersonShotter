@@ -7,6 +7,8 @@ public class MainManager : MonoSingleton<MainManager>
 {
     public GameObject mainPlayer;
     public AnimController animController;
+    public CharacterBar characterBar;
+    public ClothesID clothesID;
     public Joystick joystick;
     public Rigidbody rb;
     public float mainHealth;
