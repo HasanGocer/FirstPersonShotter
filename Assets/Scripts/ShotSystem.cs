@@ -12,11 +12,12 @@ public class ShotSystem : MonoSingleton<ShotSystem>
     [SerializeField] float _hitDistance;
     [SerializeField] GameObject _shotPanel;
     [SerializeField] Button _shotButton;
-
+    private GameObject _camera;
     public void ShotSystemStart()
     {
         _shotPanel.SetActive(true);
         _shotButton.onClick.AddListener(Hit);
+        _camera = Camera.main.gameObject;
     }
 
     //Main karakterin Shot kodu
@@ -24,7 +25,7 @@ public class ShotSystem : MonoSingleton<ShotSystem>
     {
         RaycastHit hit;
 
-        if (Physics.Raycast(_gunPos.transform.position, transform.TransformDirection(Vector3.forward) * _hitDistance, out hit, _hitDistance))
+        if (Physics.Raycast(_camera.transform.position, _camera.transform.TransformDirection(Vector3.forward) * _hitDistance, out hit, _hitDistance))
             if (hit.collider.gameObject.CompareTag("Wall")) ParticalSystem.Instance.WallShotPartical(hit.point);
             else if (hit.collider.gameObject.CompareTag("RivalPlayer")) RivalHit(hit.point, hit.collider.gameObject);
     }
