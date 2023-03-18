@@ -52,7 +52,11 @@ public class SeenManager : MonoSingleton<SeenManager>
                 RivalSelect(targetRivalHit, navMeshAgent, rival, rivalID);
                 yield return new WaitForSeconds(_hitCountdawn);
             }
-            else navMeshAgent.isStopped = false;
+            else
+            {
+                rivalID.isSeen = false;
+                navMeshAgent.isStopped = false;
+            }
 
             yield return new WaitForEndOfFrame();
         }
@@ -85,13 +89,18 @@ public class SeenManager : MonoSingleton<SeenManager>
                 FriendSelect(targetFriendHit, navMeshAgent, friend, friendID);
                 yield return new WaitForSeconds(_hitCountdawn);
             }
-            else navMeshAgent.isStopped = false;
+            else
+            {
+                friendID.isSeen = false;
+                navMeshAgent.isStopped = false;
+            }
+
 
             yield return new WaitForEndOfFrame();
         }
     }
 
-    private IEnumerator FriendHit(Vector3 hitPos, GameObject rival, FriendID friendID)
+    private void FriendHit(Vector3 hitPos, GameObject rival, FriendID friendID)
     {
         RivalID rivalID = rival.GetComponent<RivalID>();
         ItemData.Field field = ItemData.Instance.field;
@@ -100,11 +109,8 @@ public class SeenManager : MonoSingleton<SeenManager>
         rivalID.characterBar.BarUpdate(field.rivalHealth, rivalID.rivalHealth, field.mainDamage);
         rivalID.rivalHealth -= field.mainDamage;
         ParticalSystem.Instance.BodyShotPartical(hitPos);
-        yield return new WaitForSeconds(_hitCountdawn);
-        rivalID.isSeen = false;
-        friendID.isSeen = false;
     }
-    private IEnumerator RivalHit(Vector3 hitPos, GameObject friend, RivalID rivalID)
+    private void RivalHit(Vector3 hitPos, GameObject friend, RivalID rivalID)
     {
         FriendID friendID = friend.GetComponent<FriendID>();
         ItemData.Field field = ItemData.Instance.field;
@@ -113,9 +119,6 @@ public class SeenManager : MonoSingleton<SeenManager>
         friendID.characterBar.BarUpdate(field.mainHealth, friendID.friendHealth, field.rivalDamage);
         friendID.friendHealth -= field.rivalDamage;
         ParticalSystem.Instance.BodyShotPartical(hitPos);
-        yield return new WaitForSeconds(_hitCountdawn);
-        friendID.isSeen = false;
-        rivalID.isSeen = false;
     }
     private void RivalSelect(RaycastHit hit, NavMeshAgent navMeshAgent, GameObject rival, RivalID rivalID)
     {
@@ -127,7 +130,7 @@ public class SeenManager : MonoSingleton<SeenManager>
         navMeshAgent.isStopped = true;
 
         ParticalSystem.Instance.ShotGunPartical(rivalID.gunFirePos.transform.position + new Vector3(0, 0, 0.8f), friend);
-        StartCoroutine(RivalHit(hit.point, friend, rivalID));
+        RivalHit(hit.point, friend, rivalID);
 
         if (!friendID.isSeen)
         {
@@ -146,7 +149,7 @@ public class SeenManager : MonoSingleton<SeenManager>
         navMeshAgent.isStopped = true;
 
         ParticalSystem.Instance.ShotGunPartical(friendID.gunFirePos.transform.position + new Vector3(0, 0, 0.8f), rival);
-        StartCoroutine(FriendHit(hit.point, hit.collider.gameObject, friendID));
+        FriendHit(hit.point, hit.collider.gameObject, friendID);
 
         if (!rivalID.isSeen)
         {
