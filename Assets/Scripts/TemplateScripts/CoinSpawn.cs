@@ -41,6 +41,7 @@ public class CoinSpawn : MonoSingleton<CoinSpawn>
     }
     private IEnumerator Walk(GameObject obj, GameObject finish)
     {
+        MoneySystem.Instance.MoneyTextRevork(Random.Range(3, 5));
         obj.transform.DOMove(finish.transform.position, 0.3f);
         yield return new WaitForSeconds(0.3f);
         ObjectPool.Instance.AddObject(_OPCoinCount, obj);

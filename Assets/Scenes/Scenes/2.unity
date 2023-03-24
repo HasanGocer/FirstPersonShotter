@@ -1578,8 +1578,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainPlayer: {fileID: 1913752730}
   animController: {fileID: 1913752737}
-  characterBar: {fileID: 0}
-  clothesID: {fileID: 0}
+  characterBar: {fileID: 1913752739}
+  clothesID: {fileID: 1913752735}
   joystick: {fileID: 1506872443}
   rb: {fileID: 1913752734}
   mainHealth: 0
@@ -3033,7 +3033,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1913752730}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.6
   m_Height: 2.6
@@ -3079,7 +3079,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  rotationSpeed: 100
+  rotationSpeed: 6
   isUseJoystick: 0
 --- !u!114 &1913752739
 MonoBehaviour:

@@ -68,7 +68,6 @@ public class CharacterBar : MonoBehaviour
             rivalID.capsuleCollider.enabled = false;
             _barPanel.SetActive(false);
 
-            GameManager.Instance.addedMoney += (int)mainManager.rivalDownAddedMoney;
             CoinSpawn.Instance.Spawn(gameObject, mainManager.mainPlayer);
             FinishSystem.Instance.RivalDown();
         }

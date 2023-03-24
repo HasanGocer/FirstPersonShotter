@@ -28,13 +28,14 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
 
             float rotateInput = joystick.Horizontal;
             Vector3 rotation = new Vector3(0, rotateInput, 0);
-            rb.MoveRotation(rb.transform.localRotation * Quaternion.Euler(rotation * rotationSpeed * Time.fixedDeltaTime));
+            rb.transform.rotation = Quaternion.Lerp(rb.transform.rotation, Quaternion.Euler(rotation * rotationSpeed) * rb.transform.rotation, Time.deltaTime);
 
             Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput);
             movement = transform.TransformDirection(movement);
             (movement).Normalize();
 
-            rb.MovePosition(transform.position + movement * speed * Time.fixedDeltaTime);
+            rb.velocity = Vector3.zero;
+            rb.velocity = movement * speed;
         }
         else
         {

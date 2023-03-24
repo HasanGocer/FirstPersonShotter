@@ -28,7 +28,7 @@ public class GameStat : MonoSingleton<GameStat>
         {
 
             _friendWinCount++;
-            addedMoney += GameManager.Instance.addedMoney;
+            addedMoney += Random.Range(30, 50);
             if (_friendWinCount == _WinCount)
             {
                 Buttons buttons = Buttons.Instance;
@@ -40,7 +40,6 @@ public class GameStat : MonoSingleton<GameStat>
                 buttons.winPanel.SetActive(true);
                 buttons.barPanel.SetActive(true);
                 buttons.finishGameMoneyText.text = moneySystem.NumberTextRevork(addedMoney);
-                moneySystem.MoneyTextRevork(addedMoney);
             }
             else
             {
