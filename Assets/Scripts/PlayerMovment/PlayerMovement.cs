@@ -8,7 +8,7 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
     public float rotationSpeed = 100f; // Dönüþ hýzý
     [HideInInspector] public bool isUseJoystick;
     private Rigidbody rb;
-    private Touch touch;
+    [HideInInspector] public int joystickTouchCount = -1;
 
     void Start()
     {
@@ -20,6 +20,7 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
     {
         if (GameManager.Instance.gameStat == GameManager.GameStat.start && (joystick.Horizontal != 0 || joystick.Vertical != 0))
         {
+            touchCheck();
             // Joystick ile karakterin hareketi
             float horizontalInput = joystick.Horizontal;
             float verticalInput = joystick.Vertical;
@@ -40,6 +41,14 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
         else
         {
             isUseJoystick = false;
+            joystickTouchCount = -1;
+        }
+    }
+    private void touchCheck()
+    {
+        if (joystickTouchCount == -1)
+        {
+            joystickTouchCount = Input.touchCount;
         }
     }
 }

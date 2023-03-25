@@ -13,6 +13,8 @@ public class PlayerRotation : MonoSingleton<PlayerRotation>
     private float dragStartTime; // Sürükleme hareketinin baþlangýç zamaný
     private Vector3 initialRotation; // Kameranýn baþlangýç rotasyonu
     [HideInInspector] public float xRot;
+    Touch touch;
+    int touchCount = -1;
     void Start()
     {
         // Kameranýn baþlangýç rotasyonu alýnýr
@@ -22,9 +24,9 @@ public class PlayerRotation : MonoSingleton<PlayerRotation>
     void Update()
     {
         // Dokunma sayýsý kontrol edilir
-        if (Input.touchCount > 0 && !PlayerMovement.Instance.isUseJoystick && GameManager.Instance.gameStat == GameManager.GameStat.start)
+        if (Input.touchCount > 0 && TouchCheck() && GameManager.Instance.gameStat == GameManager.GameStat.start)
         {
-            Touch touch = Input.GetTouch(0);
+
 
             // Dokunma hareketi kontrol edilir
             switch (touch.phase)
@@ -67,5 +69,22 @@ public class PlayerRotation : MonoSingleton<PlayerRotation>
                     break;
             }
         }
+    }
+    private bool TouchCheck()
+    {
+        if (PlayerMovement.Instance.joystickTouchCount == Input.touchCount)
+        {
+            return false;
+        }
+        else
+        {
+            if (touchCount == -1)
+            {
+                touchCount = Input.touchCount;
+                touch = Input.GetTouch(touchCount - 1);
+            }
+            return true;
+        }
+
     }
 }
