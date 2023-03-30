@@ -15,6 +15,9 @@ public class ShotSystem : MonoSingleton<ShotSystem>
     [SerializeField] Button _shotButton;
     private GameObject _camera;
     private Vector3 _standartPos;
+    [HideInInspector] public int touchCount = -1;
+
+
     public void ShotSystemStart()
     {
         _shotPanel.SetActive(true);
@@ -27,10 +30,11 @@ public class ShotSystem : MonoSingleton<ShotSystem>
     private void Hit()
     {
         RaycastHit hit;
-
+        touchCount = Input.touchCount - 1;
         if (Physics.Raycast(_camera.transform.position, _camera.transform.TransformDirection(Vector3.forward) * _hitDistance, out hit, _hitDistance))
             if (hit.collider.gameObject.CompareTag("Wall")) ParticalSystem.Instance.WallShotPartical(hit.point);
             else if (hit.collider.gameObject.CompareTag("RivalPlayer")) RivalHit(hit.point, hit.collider.gameObject);
+        touchCount = -1;
     }
     private void RivalHit(Vector3 hitPos, GameObject rival)
     {

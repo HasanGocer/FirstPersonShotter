@@ -16,7 +16,7 @@ public class PlayerMovement : MonoSingleton<PlayerMovement>
         joystick = MainManager.Instance.joystick;
     }
 
-    void FixedUpdate()
+    void Update()
     {
         if (GameManager.Instance.gameStat == GameManager.GameStat.start && (joystick.Horizontal != 0 || joystick.Vertical != 0))
         {

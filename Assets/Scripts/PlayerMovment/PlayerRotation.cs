@@ -13,8 +13,10 @@ public class PlayerRotation : MonoSingleton<PlayerRotation>
     private float dragStartTime; // Sürükleme hareketinin baþlangýç zamaný
     private Vector3 initialRotation; // Kameranýn baþlangýç rotasyonu
     [HideInInspector] public float xRot;
+
+    bool isTouch;
     Touch touch;
-    int touchCount = -1;
+    int touchCount = -2;
     void Start()
     {
         // Kameranýn baþlangýç rotasyonu alýnýr
@@ -24,67 +26,70 @@ public class PlayerRotation : MonoSingleton<PlayerRotation>
     void Update()
     {
         // Dokunma sayýsý kontrol edilir
-        if (Input.touchCount > 0 && TouchCheck() && GameManager.Instance.gameStat == GameManager.GameStat.start)
-        {
-
-
-            // Dokunma hareketi kontrol edilir
-            switch (touch.phase)
-            {
-                case TouchPhase.Began:
-                    // Dokunma baþlangýç noktasý alýnýr ve sürükleme hareketi kontrolü baþlatýlýr
-                    lastTouchPosition = touch.position;
-                    dragStartTime = Time.time;
-                    isDragging = true;
-                    break;
-
-                case TouchPhase.Moved:
-                    // Kamera rotasyonu hesaplanýr ve uygulanýr
-                    Vector2 delta = touch.position - lastTouchPosition;
-
-                    xRot = transform.eulerAngles.x - delta.y * sensitivity / 5;
-                    if (xRot > 300) xRot -= 360;
-                    xRot = Mathf.Clamp(xRot, -xdistance, xdistance);
-
-                    transform.eulerAngles = new Vector3(
-                       xRot,
-                        transform.eulerAngles.y + delta.x * sensitivity,
-                        0f); ;
-                    lastTouchPosition = touch.position;
-                    break;
-
-                case TouchPhase.Ended:
-                    // Dokunma hareketi bittiðinde sürükleme hareketi kontrolü sonlandýrýlýr
-                    isDragging = false;
-
-                    // Sürükleme hareketi kontrolü için sýnýr deðerler hesaplanýr
-                    float dragTime = Time.time - dragStartTime;
-                    float dragDistance = (touch.position - lastTouchPosition).magnitude;
-
-                    // Sürükleme hareketi sýnýr deðerleri aþýlýrsa, kamera rotasyonu sýfýrlanýr
-                    if (dragTime <= dragTimeThreshold && dragDistance >= dragDistanceThreshold)
+        if (GameManager.Instance.gameStat == GameManager.GameStat.start)
+            if (Input.touchCount > 0)
+                if (TouchCheck())
+                    switch (touch.phase)
                     {
-                        transform.eulerAngles = initialRotation;
+                        case TouchPhase.Began:
+                            // Dokunma baþlangýç noktasý alýnýr ve sürükleme hareketi kontrolü baþlatýlýr
+                            lastTouchPosition = touch.position;
+                            dragStartTime = Time.time;
+                            isDragging = true;
+                            break;
+
+                        case TouchPhase.Moved:
+                            // Kamera rotasyonu hesaplanýr ve uygulanýr
+                            Vector2 delta = touch.position - lastTouchPosition;
+
+                            xRot = transform.eulerAngles.x - delta.y * sensitivity / 5;
+                            if (xRot > 300) xRot -= 360;
+                            xRot = Mathf.Clamp(xRot, -xdistance, xdistance);
+
+                            transform.eulerAngles = new Vector3
+                                (xRot,
+                                transform.eulerAngles.y + delta.x * sensitivity,
+                                0f); ;
+                            lastTouchPosition = touch.position;
+                            break;
+
+                        case TouchPhase.Ended:
+                            // Dokunma hareketi bittiðinde sürükleme hareketi kontrolü sonlandýrýlýr
+                            isDragging = false;
+
+                            // Sürükleme hareketi kontrolü için sýnýr deðerler hesaplanýr
+                            float dragTime = Time.time - dragStartTime;
+                            float dragDistance = (touch.position - lastTouchPosition).magnitude;
+
+                            // Sürükleme hareketi sýnýr deðerleri aþýlýrsa, kamera rotasyonu sýfýrlanýr
+                            if (dragTime <= dragTimeThreshold && dragDistance >= dragDistanceThreshold)
+                            {
+                                transform.eulerAngles = initialRotation;
+                            }
+                            break;
                     }
-                    break;
-            }
-        }
     }
     private bool TouchCheck()
     {
-        if (PlayerMovement.Instance.joystickTouchCount == Input.touchCount)
+        if (PlayerMovement.Instance.joystickTouchCount == Input.touchCount || Input.touchCount == ShotSystem.Instance.touchCount || PlayerMovement.Instance.joystickTouchCount == touchCount || touchCount == ShotSystem.Instance.touchCount)
         {
+            isTouch = false;
+            touchCount = -2;
             return false;
         }
         else
         {
-            if (touchCount == -1)
-            {
-                touchCount = Input.touchCount;
-                touch = Input.GetTouch(touchCount - 1);
-            }
+            if (touchCount == -2)
+                if (!isTouch)
+                {
+                    touchCount = Input.touchCount - 1;
+                    print(touchCount);
+                    touch = Input.GetTouch(touchCount);
+                    isTouch = true;
+                }
+                else
+                    touch = Input.GetTouch(touchCount);
             return true;
         }
-
     }
 }
