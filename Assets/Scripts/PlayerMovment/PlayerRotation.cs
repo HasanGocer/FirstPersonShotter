@@ -33,7 +33,7 @@ public class PlayerRotation : MonoSingleton<PlayerRotation>
         if (GameManager.Instance.gameStat == GameManager.GameStat.start)
             if (Input.touchCount > 0)
             {
-                Touch touch = Input.GetTouch(0);
+                Touch touch = Input.GetTouch(Input.touchCount - 1);
                 if (touch.position.x > yMin && touch.position.x < yMax)
 
                     switch (touch.phase)

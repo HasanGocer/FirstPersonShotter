@@ -147,7 +147,6 @@ public class Buttons : MonoSingleton<Buttons>
     }
     private IEnumerator StartButton()
     {
-        GameManager.Instance.gameStat = GameManager.GameStat.start;
         startPanel.SetActive(false);
         _CountdownPanel.SetActive(true);
         _countdownText.gameObject.SetActive(true);
@@ -164,6 +163,7 @@ public class Buttons : MonoSingleton<Buttons>
         _countdownText.text = "Start";
         yield return new WaitForSeconds(1);
         _CountdownPanel.SetActive(false);
+        GameManager.Instance.gameStat = GameManager.GameStat.start;
 
         MainManager.Instance.characterBar.MainCharacterStart();
         MainManager.Instance.clothesID.MainStart();
