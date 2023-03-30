@@ -6,6 +6,7 @@ public class PlayerRotation : MonoSingleton<PlayerRotation>
 {
     [SerializeField] private float sensitivity = 2.0f; // Kamera hassasiyeti
     [SerializeField] private float xdistance;
+    [SerializeField] GameObject _player;
     private Vector2 lastTouchPosition; // Son dokunma konumu
     private bool isDragging = false; // Dokunma sürüklendi mi kontrolü
     private float dragTimeThreshold = 0.2f; // Sürükleme hareketinin algýlanma süresi eþiði
@@ -14,13 +15,16 @@ public class PlayerRotation : MonoSingleton<PlayerRotation>
     private Vector3 initialRotation; // Kameranýn baþlangýç rotasyonu
     [HideInInspector] public float xRot;
 
-    bool isTouch;
-    Touch touch;
-    int touchCount = -2;
+    RectTransform rectTransform;
+    float yMin, yMax;
+
     void Start()
     {
-        // Kameranýn baþlangýç rotasyonu alýnýr
-        initialRotation = transform.eulerAngles;
+        if (GameManager.Instance.gameStat == GameManager.GameStat.start)
+            initialRotation = _player.transform.eulerAngles;
+        rectTransform = GetComponent<RectTransform>();
+        yMin = (Camera.main.pixelHeight / 2) - (rectTransform.rect.height / 2);
+        yMax = (Camera.main.pixelHeight / 2) + (rectTransform.rect.height / 2);
     }
 
     void Update()
@@ -28,7 +32,10 @@ public class PlayerRotation : MonoSingleton<PlayerRotation>
         // Dokunma sayýsý kontrol edilir
         if (GameManager.Instance.gameStat == GameManager.GameStat.start)
             if (Input.touchCount > 0)
-                if (TouchCheck())
+            {
+                Touch touch = Input.GetTouch(0);
+                if (touch.position.x > yMin && touch.position.x < yMax)
+
                     switch (touch.phase)
                     {
                         case TouchPhase.Began:
@@ -42,13 +49,13 @@ public class PlayerRotation : MonoSingleton<PlayerRotation>
                             // Kamera rotasyonu hesaplanýr ve uygulanýr
                             Vector2 delta = touch.position - lastTouchPosition;
 
-                            xRot = transform.eulerAngles.x - delta.y * sensitivity / 5;
+                            xRot = _player.transform.eulerAngles.x - delta.y * sensitivity / 5;
                             if (xRot > 300) xRot -= 360;
                             xRot = Mathf.Clamp(xRot, -xdistance, xdistance);
 
-                            transform.eulerAngles = new Vector3
+                            _player.transform.eulerAngles = new Vector3
                                 (xRot,
-                                transform.eulerAngles.y + delta.x * sensitivity,
+                              _player.transform.eulerAngles.y + delta.x * sensitivity,
                                 0f); ;
                             lastTouchPosition = touch.position;
                             break;
@@ -64,32 +71,11 @@ public class PlayerRotation : MonoSingleton<PlayerRotation>
                             // Sürükleme hareketi sýnýr deðerleri aþýlýrsa, kamera rotasyonu sýfýrlanýr
                             if (dragTime <= dragTimeThreshold && dragDistance >= dragDistanceThreshold)
                             {
-                                transform.eulerAngles = initialRotation;
+                                _player.transform.eulerAngles = initialRotation;
                             }
                             break;
                     }
-    }
-    private bool TouchCheck()
-    {
-        if (PlayerMovement.Instance.joystickTouchCount == Input.touchCount || Input.touchCount == ShotSystem.Instance.touchCount || PlayerMovement.Instance.joystickTouchCount == touchCount || touchCount == ShotSystem.Instance.touchCount)
-        {
-            isTouch = false;
-            touchCount = -2;
-            return false;
-        }
-        else
-        {
-            if (touchCount == -2)
-                if (!isTouch)
-                {
-                    touchCount = Input.touchCount - 1;
-                    print(touchCount);
-                    touch = Input.GetTouch(touchCount);
-                    isTouch = true;
-                }
-                else
-                    touch = Input.GetTouch(touchCount);
-            return true;
-        }
+            }
+
     }
 }

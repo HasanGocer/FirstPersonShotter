@@ -1428,6 +1428,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CanvasTemp 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8678466931822708031, guid: e2ea9127f9100f5408c842476dec2332,
+        type: 3}
+      propertyPath: _player
+      value: 
+      objectReference: {fileID: 1913752730}
     - target: {fileID: 8722066976627480185, guid: e2ea9127f9100f5408c842476dec2332,
         type: 3}
       propertyPath: m_IsActive
@@ -2961,7 +2966,6 @@ GameObject:
   - component: {fileID: 1913752735}
   - component: {fileID: 1913752738}
   - component: {fileID: 1913752739}
-  - component: {fileID: 1913752740}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -3080,8 +3084,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   rotationSpeed: 6
-  isUseJoystick: 0
-  joystickTouchCount: -1
 --- !u!114 &1913752739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3097,18 +3099,3 @@ MonoBehaviour:
   characterStat: 2
   _bar: {fileID: 872081514}
   _barPanel: {fileID: 872081515}
---- !u!114 &1913752740
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1913752730}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c668475eebd42d4b8821e678c546e2b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sensitivity: 0.1
-  xdistance: 40
-  xRot: 0
