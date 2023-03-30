@@ -45,7 +45,8 @@ public class GameStat : MonoSingleton<GameStat>
             {
                 Buttons buttons = Buttons.Instance;
 
-                buttons.ContinuePanel.SetActive(true);
+                buttons.continuePanel.SetActive(true);
+                buttons.friendWin.SetActive(true);
                 buttons.rivalText.text = _rivalWinCount.ToString();
                 buttons.friendText.text = _friendWinCount.ToString();
             }
@@ -63,7 +64,8 @@ public class GameStat : MonoSingleton<GameStat>
             {
                 Buttons buttons = Buttons.Instance;
 
-                buttons.ContinuePanel.SetActive(true);
+                buttons.continuePanel.SetActive(true);
+                buttons.rivalWin.SetActive(true);
                 buttons.rivalText.text = _rivalWinCount.ToString();
                 buttons.friendText.text = _friendWinCount.ToString();
             }

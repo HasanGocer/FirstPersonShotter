@@ -59,7 +59,8 @@ public class Buttons : MonoSingleton<Buttons>
     [Header("Continue_Panel")]
     [Space(10)]
 
-    public GameObject ContinuePanel;
+    public GameObject continuePanel;
+    public GameObject friendWin, rivalWin;
     public TMP_Text rivalText, friendText;
     [SerializeField] private Button _continueButton;
     [SerializeField] int _continueWaitTime;

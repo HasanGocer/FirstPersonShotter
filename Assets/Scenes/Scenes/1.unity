@@ -1504,6 +1504,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 316263155}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &754657751 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2375366535830635252, guid: e2ea9127f9100f5408c842476dec2332,
+    type: 3}
+  m_PrefabInstance: {fileID: 679440802}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &754657752 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4938183078862446141, guid: e2ea9127f9100f5408c842476dec2332,
+    type: 3}
+  m_PrefabInstance: {fileID: 679440802}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &782121447
 GameObject:
   m_ObjectHideFlags: 0
@@ -1697,7 +1709,9 @@ MonoBehaviour:
   _loadingScreenCountdownTime: 2
   _startSceneCount: 0
   _UIStartBackButton: {fileID: 0}
-  ContinuePanel: {fileID: 1792822367}
+  continuePanel: {fileID: 1792822367}
+  friendWin: {fileID: 754657751}
+  rivalWin: {fileID: 754657752}
   rivalText: {fileID: 1826798942}
   friendText: {fileID: 1826798941}
   _continueButton: {fileID: 1792822366}

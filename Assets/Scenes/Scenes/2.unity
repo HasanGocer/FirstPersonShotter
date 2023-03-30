@@ -1729,7 +1729,9 @@ MonoBehaviour:
   _loadingScreenCountdownTime: 2
   _startSceneCount: 1
   _UIStartBackButton: {fileID: 0}
-  ContinuePanel: {fileID: 1553359656}
+  continuePanel: {fileID: 1553359656}
+  friendWin: {fileID: 2002734987}
+  rivalWin: {fileID: 2002734988}
   rivalText: {fileID: 1553359655}
   friendText: {fileID: 1553359654}
   _continueButton: {fileID: 1553359653}
@@ -3099,3 +3101,15 @@ MonoBehaviour:
   characterStat: 2
   _bar: {fileID: 872081514}
   _barPanel: {fileID: 872081515}
+--- !u!1 &2002734987 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2375366535830635252, guid: e2ea9127f9100f5408c842476dec2332,
+    type: 3}
+  m_PrefabInstance: {fileID: 679440802}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2002734988 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4938183078862446141, guid: e2ea9127f9100f5408c842476dec2332,
+    type: 3}
+  m_PrefabInstance: {fileID: 679440802}
+  m_PrefabAsset: {fileID: 0}
